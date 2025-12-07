@@ -1,0 +1,356 @@
+// BNCC LMS Database Schema
+// Converted from PostgreSQL to Prisma format
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ======================
+// BUILDER MODULE MODELS
+// ======================
+
+model EducationalLevel {
+  id          Int      @id @default(autoincrement())
+  levelName   String   @map("level_name") @db.VarChar(50)
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  series      Series[]
+  
+  @@map("educational_levels")
+}
+
+model Series {
+  id           Int              @id @default(autoincrement())
+  levelId      Int              @map("level_id")
+  seriesNumber Int              @map("series_number")
+  seriesName   String           @map("series_name") @db.VarChar(100)
+  description  String?          @db.Text
+  createdAt    DateTime         @default(now()) @map("created_at")
+  
+  level        EducationalLevel @relation(fields: [levelId], references: [id])
+  competencies Competency[]
+  courses      Course[]
+  classes      Class[]
+  students     Student[]
+  
+  @@unique([levelId, seriesNumber])
+  @@map("series")
+}
+
+model Subject {
+  id             Int      @id @default(autoincrement())
+  subjectName    String   @map("subject_name") @db.VarChar(100)
+  subjectCode    String?  @map("subject_code") @db.VarChar(20)
+  educationLevel String   @map("education_level") @db.VarChar(20)
+  description    String?  @db.Text
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now()) @map("created_at")
+  
+  competencies     Competency[]
+  moduleDisciplines ModuleDiscipline[]
+  
+  @@map("subjects")
+}
+
+model SubjectArea {
+  id          Int      @id @default(autoincrement())
+  areaName    String   @map("area_name") @db.VarChar(200)
+  areaCode    String?  @map("area_code") @db.VarChar(20)
+  description String?  @db.Text
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  
+  competencies      Competency[]
+  moduleDisciplines ModuleDiscipline[]
+  
+  @@map("subject_areas")
+}
+
+model CognitiveType {
+  id            Int      @id @default(autoincrement())
+  cognitiveName String   @map("cognitive_name") @db.VarChar(100)
+  description   String?  @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+  
+  competencies  Competency[]
+  
+  @@map("cognitive_types")
+}
+
+model CognitiveProcess {
+  id          Int      @id @default(autoincrement())
+  processName String   @map("process_name") @db.VarChar(200)
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  
+  competencies CompetencyCognitiveProcess[]
+  
+  @@map("cognitive_processes")
+}
+
+model SkillType {
+  id            Int      @id @default(autoincrement())
+  skillTypeName String   @map("skill_type_name") @db.VarChar(100)
+  description   String?  @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+  
+  competencies  Competency[]
+  
+  @@map("skill_types")
+}
+
+model Competency {
+  id               Int      @id @default(autoincrement())
+  competencyCode   String   @unique @map("competency_code") @db.VarChar(20)
+  competencyText   String   @map("competency_text") @db.Text
+  subjectId        Int?     @map("subject_id")
+  seriesId         Int?     @map("series_id")
+  subjectAreaId    Int?     @map("subject_area_id")
+  skillTypeId      Int?     @map("skill_type_id")
+  cognitiveTypeId  Int?     @map("cognitive_type_id")
+  domainTypology   String?  @map("domain_typology") @db.VarChar(200)
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at")
+  
+  subject         Subject?                        @relation(fields: [subjectId], references: [id])
+  series          Series?                         @relation(fields: [seriesId], references: [id])
+  subjectArea     SubjectArea?                    @relation(fields: [subjectAreaId], references: [id])
+  skillType       SkillType?                      @relation(fields: [skillTypeId], references: [id])
+  cognitiveType   CognitiveType?                  @relation(fields: [cognitiveTypeId], references: [id])
+  
+  cognitiveProcesses CompetencyCognitiveProcess[]
+  standardSkills     StandardSkill[]
+  
+  @@map("competencies")
+}
+
+model CompetencyCognitiveProcess {
+  competencyId        Int @map("competency_id")
+  cognitiveProcessId  Int @map("cognitive_process_id")
+  
+  competency         Competency       @relation(fields: [competencyId], references: [id])
+  cognitiveProcess   CognitiveProcess @relation(fields: [cognitiveProcessId], references: [id])
+  
+  @@id([competencyId, cognitiveProcessId])
+  @@map("competency_cognitive_processes")
+}
+
+model StandardSkill {
+  id               Int      @id @default(autoincrement())
+  competencyId     Int      @map("competency_id")
+  skillCode        String   @unique @map("skill_code") @db.VarChar(20)
+  skillDescription String   @map("skill_description") @db.Text
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at")
+  
+  competency       Competency @relation(fields: [competencyId], references: [id])
+  
+  @@map("standard_skills")
+}
+
+// ======================
+// COURSE STRUCTURE
+// ======================
+
+model Course {
+  id           Int      @id @default(autoincrement())
+  courseName   String   @map("course_name") @db.VarChar(200)
+  seriesId     Int      @map("series_id")
+  description  String?  @db.Text
+  academicYear Int?     @map("academic_year")
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+  
+  series       Series         @relation(fields: [seriesId], references: [id])
+  modules      CourseModule[]
+  
+  @@map("courses")
+}
+
+model CourseModule {
+  id           Int      @id @default(autoincrement())
+  courseId     Int      @map("course_id")
+  moduleName   String   @map("module_name") @db.VarChar(200)
+  moduleOrder  Int?     @map("module_order")
+  description  String?  @db.Text
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+  
+  course       Course             @relation(fields: [courseId], references: [id])
+  disciplines  ModuleDiscipline[]
+  
+  @@map("course_modules")
+}
+
+model ModuleDiscipline {
+  id             Int      @id @default(autoincrement())
+  moduleId       Int      @map("module_id")
+  subjectId      Int?     @map("subject_id")
+  subjectAreaId  Int?     @map("subject_area_id")
+  disciplineName String   @map("discipline_name") @db.VarChar(200)
+  workloadHours  Int?     @map("workload_hours")
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now()) @map("created_at")
+  
+  module              CourseModule              @relation(fields: [moduleId], references: [id])
+  subject             Subject?                  @relation(fields: [subjectId], references: [id])
+  subjectArea         SubjectArea?              @relation(fields: [subjectAreaId], references: [id])
+  teacherClassDisciplines TeacherClassDiscipline[]
+  
+  @@map("module_disciplines")
+}
+
+// ======================
+// MANAGER MODULE MODELS
+// ======================
+
+model School {
+  id           Int      @id @default(autoincrement())
+  schoolName   String   @map("school_name") @db.VarChar(200)
+  schoolCode   String?  @unique @map("school_code") @db.VarChar(50)
+  address      String?  @db.Text
+  city         String?  @db.VarChar(100)
+  state        String?  @db.VarChar(50)
+  postalCode   String?  @map("postal_code") @db.VarChar(20)
+  phone        String?  @db.VarChar(20)
+  email        String?  @db.VarChar(100)
+  directorName String?  @map("director_name") @db.VarChar(200)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+  
+  teachers     TeacherSchool[]
+  classes      Class[]
+  students     Student[]
+  
+  @@map("schools")
+}
+
+model TeacherType {
+  id          Int      @id @default(autoincrement())
+  typeName    String   @map("type_name") @db.VarChar(50)
+  description String?  @db.Text
+  
+  teachers    Teacher[]
+  
+  @@map("teacher_types")
+}
+
+model Teacher {
+  id             Int       @id @default(autoincrement())
+  teacherCode    String?   @unique @map("teacher_code") @db.VarChar(50)
+  fullName       String    @map("full_name") @db.VarChar(200)
+  email          String?   @unique @db.VarChar(100)
+  phone          String?   @db.VarChar(20)
+  teacherTypeId  Int?      @map("teacher_type_id")
+  specialization String?   @db.Text
+  hireDate       DateTime? @map("hire_date") @db.Date
+  active         Boolean   @default(true)
+  createdAt      DateTime  @default(now()) @map("created_at")
+  
+  teacherType             TeacherType?              @relation(fields: [teacherTypeId], references: [id])
+  schools                 TeacherSchool[]
+  teacherClassDisciplines TeacherClassDiscipline[]
+  
+  @@map("teachers")
+}
+
+model TeacherSchool {
+  teacherId Int       @map("teacher_id")
+  schoolId  Int       @map("school_id")
+  startDate DateTime? @map("start_date") @db.Date
+  endDate   DateTime? @map("end_date") @db.Date
+  active    Boolean   @default(true)
+  
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+  school    School  @relation(fields: [schoolId], references: [id])
+  
+  @@id([teacherId, schoolId])
+  @@map("teacher_schools")
+}
+
+model Class {
+  id               Int      @id @default(autoincrement())
+  className        String   @map("class_name") @db.VarChar(100)
+  seriesId         Int      @map("series_id")
+  schoolId         Int      @map("school_id")
+  academicYear     Int      @map("academic_year")
+  academicPeriod   String?  @map("academic_period") @db.VarChar(20)
+  maxStudents      Int?     @map("max_students")
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at")
+  
+  series                  Series                    @relation(fields: [seriesId], references: [id])
+  school                  School                    @relation(fields: [schoolId], references: [id])
+  students                Student[]
+  teacherClassDisciplines TeacherClassDiscipline[]
+  
+  @@unique([schoolId, seriesId, className, academicYear])
+  @@map("classes")
+}
+
+model Student {
+  id             Int       @id @default(autoincrement())
+  studentCode    String?   @unique @map("student_code") @db.VarChar(50)
+  fullName       String    @map("full_name") @db.VarChar(200)
+  birthDate      DateTime? @map("birth_date") @db.Date
+  gender         String?   @db.Char(1)
+  schoolId       Int       @map("school_id")
+  seriesId       Int       @map("series_id")
+  classId        Int?      @map("class_id")
+  enrollmentDate DateTime? @map("enrollment_date") @db.Date
+  guardianName   String?   @map("guardian_name") @db.VarChar(200)
+  guardianPhone  String?   @map("guardian_phone") @db.VarChar(20)
+  guardianEmail  String?   @map("guardian_email") @db.VarChar(100)
+  active         Boolean   @default(true)
+  createdAt      DateTime  @default(now()) @map("created_at")
+  
+  school  School  @relation(fields: [schoolId], references: [id])
+  series  Series  @relation(fields: [seriesId], references: [id])
+  class   Class?  @relation(fields: [classId], references: [id])
+  
+  @@map("students")
+}
+
+model TeacherClassDiscipline {
+  id                Int       @id @default(autoincrement())
+  teacherId         Int       @map("teacher_id")
+  classId           Int       @map("class_id")
+  moduleDisciplineId Int      @map("module_discipline_id")
+  academicYear      Int       @map("academic_year")
+  startDate         DateTime? @map("start_date") @db.Date
+  endDate           DateTime? @map("end_date") @db.Date
+  active            Boolean   @default(true)
+  createdAt         DateTime  @default(now()) @map("created_at")
+  
+  teacher          Teacher          @relation(fields: [teacherId], references: [id])
+  class            Class            @relation(fields: [classId], references: [id])
+  moduleDiscipline ModuleDiscipline @relation(fields: [moduleDisciplineId], references: [id])
+  
+  @@unique([teacherId, classId, moduleDisciplineId, academicYear])
+  @@map("teacher_class_disciplines")
+}
+
+// ======================
+// AUTH MODEL
+// ======================
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String
+  role     String  @default("teacher") // teacher, admin, coordinator, student
+  active   Boolean @default(true)
+  
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  @@map("users")
+}
