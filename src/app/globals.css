@@ -1,49 +1,69 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    /* BNCC LMS Custom Color Palette */
-    --primary-azure: 108 207 246;     /* #6CCFF6 */
-    --primary-black: 0 16 17;         /* #001011 */
-    --primary-gray: 117 119 128;      /* #757780 */
-    --primary-powder: 255 255 252;    /* #FFFFFC */
-    --primary-green: 164 223 0;       /* #A4DF00 */
-    
-    /* Semantic colors using our palette */
-    --background: var(--primary-powder);
-    --foreground: var(--primary-black);
-    --card: var(--primary-powder);
-    --card-foreground: var(--primary-black);
-    --popover: var(--primary-powder);
-    --popover-foreground: var(--primary-black);
-    --muted: var(--primary-gray);
-    --muted-foreground: var(--primary-gray);
-    --accent: var(--primary-azure);
-    --accent-foreground: var(--primary-black);
-    --destructive: 239 68 68;
-    --destructive-foreground: var(--primary-powder);
-    --border: 229 231 235;
-    --input: 249 250 251;
-    --ring: var(--primary-azure);
-    
-    /* Module specific colors */
-    --builder: var(--primary-azure);
-    --manager: var(--primary-gray);
-    --creator: var(--primary-green);
-    --player: var(--primary-azure);
-    --trainer: var(--primary-black);
-  }
+:root {
+  /* BNCC LMS Custom Color Palette */
+  --primary-azure: 108 207 246;     /* #6CCFF6 */
+  --primary-black: 0 16 17;         /* #001011 */
+  --primary-gray: 117 119 128;      /* #757780 */
+  --primary-powder: 255 255 252;    /* #FFFFFC */
+  --primary-green: 164 223 0;       /* #A4DF00 */
+  
+  /* Semantic colors using our palette */
+  --background: var(--primary-powder);
+  --foreground: var(--primary-black);
+  --card: var(--primary-powder);
+  --card-foreground: var(--primary-black);
+  --popover: var(--primary-powder);
+  --popover-foreground: var(--primary-black);
+  --muted: var(--primary-gray);
+  --muted-foreground: var(--primary-gray);
+  --accent: var(--primary-azure);
+  --accent-foreground: var(--primary-black);
+  --destructive: 239 68 68;
+  --destructive-foreground: var(--primary-powder);
+  --border: 229 231 235;
+  --input: 249 250 251;
+  --ring: var(--primary-azure);
+  
+  /* Module specific colors */
+  --builder: var(--primary-azure);
+  --manager: var(--primary-gray);
+  --creator: var(--primary-green);
+  --player: var(--primary-azure);
+  --trainer: var(--primary-black);
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+@theme inline {
+  --color-primary-azure: rgb(var(--primary-azure));
+  --color-primary-black: rgb(var(--primary-black));
+  --color-primary-gray: rgb(var(--primary-gray));
+  --color-primary-powder: rgb(var(--primary-powder));
+  --color-primary-green: rgb(var(--primary-green));
   
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-geist-sans), system-ui, sans-serif;
-  }
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-destructive-foreground: rgb(var(--destructive-foreground));
+  --color-border: rgb(var(--border));
+  
+  --color-builder: rgb(var(--builder));
+  --color-manager: rgb(var(--manager));
+  --color-creator: rgb(var(--creator));
+  --color-player: rgb(var(--player));
+  --color-trainer: rgb(var(--trainer));
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
