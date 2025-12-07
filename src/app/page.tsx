@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { 
   BookOpen, 
   Users, 
@@ -90,7 +91,9 @@ export default function Dashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <BookOpen className="w-8 h-8 text-builder" />
-                <Button variant="builder" size="sm">Acessar</Button>
+                <Link href="/builder">
+                  <Button variant="builder" size="sm">Acessar</Button>
+                </Link>
               </div>
               <CardTitle className="text-xl">Módulo Builder</CardTitle>
               <CardDescription>
