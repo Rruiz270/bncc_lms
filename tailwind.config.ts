@@ -9,37 +9,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Custom LMS Color Palette
+        // Custom LMS Color Palette using CSS variables
         primary: {
-          azure: '#6CCFF6',     // Pale Azure - Primary actions
-          black: '#001011',      // Rich Black - Text/headers
-          gray: '#757780',       // Gray - Secondary text
-          powder: '#FFFFFC',     // Baby Powder - Backgrounds
-          green: '#A4DF00',      // Yellow Green - Success/accents
+          azure: 'rgb(var(--primary-azure))',
+          black: 'rgb(var(--primary-black))',
+          gray: 'rgb(var(--primary-gray))',
+          powder: 'rgb(var(--primary-powder))',
+          green: 'rgb(var(--primary-green))',
         },
-        // Semantic colors using the palette
-        background: '#FFFFFC',   // Baby Powder
-        foreground: '#001011',   // Rich Black
-        card: '#FFFFFC',
-        'card-foreground': '#001011',
-        popover: '#FFFFFC',
-        'popover-foreground': '#001011',
-        muted: '#757780',
-        'muted-foreground': '#757780',
-        accent: '#6CCFF6',
-        'accent-foreground': '#001011',
-        destructive: '#ef4444',
-        'destructive-foreground': '#FFFFFC',
-        border: '#e5e7eb',
-        input: '#f9fafb',
-        ring: '#6CCFF6',
+        // Semantic colors using CSS variables
+        background: 'rgb(var(--background))',
+        foreground: 'rgb(var(--foreground))',
+        card: 'rgb(var(--card))',
+        'card-foreground': 'rgb(var(--card-foreground))',
+        popover: 'rgb(var(--popover))',
+        'popover-foreground': 'rgb(var(--popover-foreground))',
+        muted: 'rgb(var(--muted))',
+        'muted-foreground': 'rgb(var(--muted-foreground))',
+        accent: 'rgb(var(--accent))',
+        'accent-foreground': 'rgb(var(--accent-foreground))',
+        destructive: 'rgb(var(--destructive))',
+        'destructive-foreground': 'rgb(var(--destructive-foreground))',
+        border: 'rgb(var(--border))',
+        input: 'rgb(var(--input))',
+        ring: 'rgb(var(--ring))',
         
-        // Module specific colors
-        builder: '#6CCFF6',      // Azure for Builder module
-        manager: '#757780',      // Gray for Manager module
-        creator: '#A4DF00',      // Green for Creator module
-        player: '#6CCFF6',       // Azure for Player module
-        trainer: '#001011',      // Black for Trainer module
+        // Module specific colors using CSS variables
+        builder: 'rgb(var(--builder))',
+        manager: 'rgb(var(--manager))',
+        creator: 'rgb(var(--creator))',
+        player: 'rgb(var(--player))',
+        trainer: 'rgb(var(--trainer))',
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

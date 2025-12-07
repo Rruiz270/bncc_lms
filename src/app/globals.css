@@ -1,26 +1,49 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* BNCC LMS Custom Color Palette */
+    --primary-azure: 108 207 246;     /* #6CCFF6 */
+    --primary-black: 0 16 17;         /* #001011 */
+    --primary-gray: 117 119 128;      /* #757780 */
+    --primary-powder: 255 255 252;    /* #FFFFFC */
+    --primary-green: 164 223 0;       /* #A4DF00 */
+    
+    /* Semantic colors using our palette */
+    --background: var(--primary-powder);
+    --foreground: var(--primary-black);
+    --card: var(--primary-powder);
+    --card-foreground: var(--primary-black);
+    --popover: var(--primary-powder);
+    --popover-foreground: var(--primary-black);
+    --muted: var(--primary-gray);
+    --muted-foreground: var(--primary-gray);
+    --accent: var(--primary-azure);
+    --accent-foreground: var(--primary-black);
+    --destructive: 239 68 68;
+    --destructive-foreground: var(--primary-powder);
+    --border: 229 231 235;
+    --input: 249 250 251;
+    --ring: var(--primary-azure);
+    
+    /* Module specific colors */
+    --builder: var(--primary-azure);
+    --manager: var(--primary-gray);
+    --creator: var(--primary-green);
+    --player: var(--primary-azure);
+    --trainer: var(--primary-black);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
 }
