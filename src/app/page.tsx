@@ -123,7 +123,9 @@ export default function Dashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <Users className="w-8 h-8 text-manager" />
-                <Button variant="manager" size="sm">Acessar</Button>
+                <Link href="/manager">
+                  <Button variant="manager" size="sm">Acessar</Button>
+                </Link>
               </div>
               <CardTitle className="text-xl">Módulo Manager</CardTitle>
               <CardDescription>
@@ -153,7 +155,9 @@ export default function Dashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <PencilRuler className="w-8 h-8 text-creator" />
-                <Button variant="creator" size="sm">Acessar</Button>
+                <Link href="/creator">
+                  <Button variant="creator" size="sm">Acessar</Button>
+                </Link>
               </div>
               <CardTitle className="text-xl">Módulo Creator</CardTitle>
               <CardDescription>
@@ -183,7 +187,9 @@ export default function Dashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <Play className="w-8 h-8 text-player" />
-                <Button variant="player" size="sm">Acessar</Button>
+                <Link href="/player">
+                  <Button variant="player" size="sm">Acessar</Button>
+                </Link>
               </div>
               <CardTitle className="text-xl">Módulo Player</CardTitle>
               <CardDescription>
@@ -213,7 +219,9 @@ export default function Dashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <BarChart3 className="w-8 h-8 text-trainer" />
-                <Button variant="trainer" size="sm">Em Breve</Button>
+                <Link href="/trainer">
+                  <Button variant="trainer" size="sm">Acessar</Button>
+                </Link>
               </div>
               <CardTitle className="text-xl">Módulo Trainer</CardTitle>
               <CardDescription>

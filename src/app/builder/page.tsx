@@ -17,7 +17,8 @@ import {
   GraduationCap,
   Brain,
   Target,
-  FileText
+  FileText,
+  PencilRuler
 } from "lucide-react"
 import Link from 'next/link'
 
@@ -270,18 +271,23 @@ export default function BuilderModule() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow border-creator/20">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Brain className="w-5 h-5 text-builder" />
-                    Processos Cognitivos
+                    <PencilRuler className="w-5 h-5 text-creator" />
+                    Criar Aula BNCC
                   </CardTitle>
                   <CardDescription>
-                    {stats.skillTypes} tipos de habilidade e {stats.cognitiveTypes} processos cognitivos
+                    Use as competências para criar aulas alinhadas com a BNCC
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" size="sm">Explorar</Button>
+                  <Link href="/creator">
+                    <Button variant="creator" size="sm">
+                      <PencilRuler className="w-4 h-4 mr-2" />
+                      Ir para Creator
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </div>
