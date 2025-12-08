@@ -1,45 +1,107 @@
 @import "tailwindcss";
 
 :root {
-  /* BNCC LMS Custom Color Palette */
-  --primary-azure: 108 207 246;     /* #6CCFF6 */
+  /* BNCC LMS Modern Color Palette - Sophisticated & Contemporary */
+  --primary-azure: 108 207 246;     /* #6CCFF6 - Minimal usage */
   --primary-black: 0 16 17;         /* #001011 */
   --primary-gray: 117 119 128;      /* #757780 */
   --primary-powder: 255 255 252;    /* #FFFFFC */
   --primary-green: 164 223 0;       /* #A4DF00 */
   
-  /* Semantic colors using our palette */
-  --background: var(--primary-powder);
-  --foreground: var(--primary-black);
-  --card: var(--primary-powder);
-  --card-foreground: var(--primary-black);
-  --popover: var(--primary-powder);
-  --popover-foreground: var(--primary-black);
-  --muted: var(--primary-gray);
-  --muted-foreground: var(--primary-gray);
-  --accent: var(--primary-azure);
-  --accent-foreground: var(--primary-black);
-  --destructive: 239 68 68;
-  --destructive-foreground: var(--primary-powder);
-  --border: 229 231 235;
-  --input: 249 250 251;
-  --ring: var(--primary-azure);
+  /* Modern Extended Palette */
+  --emerald: 16 185 129;            /* Modern emerald */
+  --sage: 139 195 74;               /* Sage green variation */
+  --charcoal: 31 41 55;             /* Modern charcoal */
+  --slate: 71 85 105;               /* Modern slate */
+  --pearl: 248 250 252;             /* Pearl white */
+  --amber: 245 158 11;              /* Warm accent */
+  --coral: 239 68 68;               /* Modern coral */
+  --violet: 139 92 246;             /* Modern violet */
+  --teal: 20 184 166;               /* Sophisticated teal */
   
-  /* Module specific colors */
-  --builder: var(--primary-azure);
-  --manager: var(--primary-gray);
-  --creator: var(--primary-green);
-  --player: var(--primary-azure);
-  --trainer: var(--primary-black);
+  /* Gradient Foundations */
+  --gradient-primary: linear-gradient(135deg, rgb(164 223 0), rgb(139 195 74));
+  --gradient-secondary: linear-gradient(135deg, rgb(31 41 55), rgb(71 85 105));
+  --gradient-accent: linear-gradient(135deg, rgb(245 158 11), rgb(239 68 68));
+  --gradient-ethereal: linear-gradient(135deg, rgb(248 250 252), rgb(255 255 252));
+  --gradient-sage: linear-gradient(135deg, rgb(139 195 74), rgb(16 185 129));
+  
+  /* Glass morphism effects */
+  --glass-bg: rgba(248, 250, 252, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  
+  /* Modern shadows */
+  --shadow-soft: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px 0 rgba(0, 0, 0, 0.12);
+  --shadow-strong: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px 0 rgba(164, 223, 0, 0.3);
+  
+  /* Semantic colors using modern palette */
+  --background: var(--pearl);
+  --foreground: var(--charcoal);
+  --card: var(--primary-powder);
+  --card-foreground: var(--charcoal);
+  --popover: var(--primary-powder);
+  --popover-foreground: var(--charcoal);
+  --muted: var(--slate);
+  --muted-foreground: var(--slate);
+  --accent: var(--emerald);
+  --accent-foreground: var(--primary-powder);
+  --destructive: var(--coral);
+  --destructive-foreground: var(--primary-powder);
+  --border: 226 232 240;
+  --input: 248 250 252;
+  --ring: var(--emerald);
+  
+  /* Module specific colors - Modern & Sophisticated */
+  --builder: var(--sage);           /* Sage green instead of blue */
+  --manager: var(--slate);          /* Sophisticated slate */
+  --creator: var(--primary-green);  /* Keep vibrant green */
+  --player: var(--emerald);         /* Emerald instead of blue */
+  --trainer: var(--charcoal);       /* Modern charcoal */
+  
+  /* Module gradients */
+  --builder-gradient: linear-gradient(135deg, rgb(139 195 74), rgb(16 185 129));
+  --manager-gradient: linear-gradient(135deg, rgb(71 85 105), rgb(117 119 128));
+  --creator-gradient: linear-gradient(135deg, rgb(164 223 0), rgb(139 195 74));
+  --player-gradient: linear-gradient(135deg, rgb(16 185 129), rgb(20 184 166));
+  --trainer-gradient: linear-gradient(135deg, rgb(31 41 55), rgb(71 85 105));
+  
+  /* Modern spacing and typography */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
 @theme inline {
+  /* Original palette */
   --color-primary-azure: rgb(var(--primary-azure));
   --color-primary-black: rgb(var(--primary-black));
   --color-primary-gray: rgb(var(--primary-gray));
   --color-primary-powder: rgb(var(--primary-powder));
   --color-primary-green: rgb(var(--primary-green));
   
+  /* Modern extended palette */
+  --color-emerald: rgb(var(--emerald));
+  --color-sage: rgb(var(--sage));
+  --color-charcoal: rgb(var(--charcoal));
+  --color-slate: rgb(var(--slate));
+  --color-pearl: rgb(var(--pearl));
+  --color-amber: rgb(var(--amber));
+  --color-coral: rgb(var(--coral));
+  --color-violet: rgb(var(--violet));
+  --color-teal: rgb(var(--teal));
+  
+  /* Semantic colors */
   --color-background: rgb(var(--background));
   --color-foreground: rgb(var(--foreground));
   --color-card: rgb(var(--card));
@@ -52,18 +114,88 @@
   --color-destructive-foreground: rgb(var(--destructive-foreground));
   --color-border: rgb(var(--border));
   
+  /* Module colors */
   --color-builder: rgb(var(--builder));
   --color-manager: rgb(var(--manager));
   --color-creator: rgb(var(--creator));
   --color-player: rgb(var(--player));
   --color-trainer: rgb(var(--trainer));
   
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/* Modern body with enhanced visual experience */
 body {
-  background: rgb(var(--background));
+  background: linear-gradient(135deg, rgb(248 250 252) 0%, rgb(255 255 252) 100%);
   color: rgb(var(--foreground));
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.6;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  scroll-behavior: smooth;
+}
+
+/* Modern utility classes */
+.glass-morphism {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.shadow-soft { box-shadow: var(--shadow-soft); }
+.shadow-medium { box-shadow: var(--shadow-medium); }
+.shadow-strong { box-shadow: var(--shadow-strong); }
+.shadow-glow { box-shadow: var(--shadow-glow); }
+
+.gradient-primary { background: var(--gradient-primary); }
+.gradient-secondary { background: var(--gradient-secondary); }
+.gradient-accent { background: var(--gradient-accent); }
+.gradient-ethereal { background: var(--gradient-ethereal); }
+.gradient-sage { background: var(--gradient-sage); }
+
+.gradient-builder { background: var(--builder-gradient); }
+.gradient-manager { background: var(--manager-gradient); }
+.gradient-creator { background: var(--creator-gradient); }
+.gradient-player { background: var(--player-gradient); }
+.gradient-trainer { background: var(--trainer-gradient); }
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-gradient { animation: gradient-shift 3s ease infinite; }
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--pearl));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgb(var(--sage)), rgb(var(--emerald)));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgb(var(--emerald)), rgb(var(--teal)));
 }

@@ -793,329 +793,552 @@ export default function PlayerModule() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-pearl via-primary-powder to-sage/5">
+      {/* Modern Header with Glassmorphism */}
+      <header className="glass-morphism border-b border-white/20 sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link href="/">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Dashboard
                 </Button>
               </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-primary-black flex items-center gap-2">
-                  <Play className="w-8 h-8 text-player" />
-                  Módulo Player
+              <div className="space-y-1">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald via-teal to-sage bg-clip-text text-transparent flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl gradient-player flex items-center justify-center animate-float shadow-glow">
+                    <Play className="w-5 h-5 text-white" />
+                  </div>
+                  Player Studio
                 </h1>
-                <p className="text-primary-gray">Execução de Aulas - Apresentação e Interação em Tempo Real</p>
+                <p className="text-slate/80 font-medium">Execução Inteligente de Aulas • Real-time Learning Analytics</p>
               </div>
             </div>
+            
             <div className="flex items-center gap-4">
-              {/* System Status */}
-              <div className="flex items-center gap-2 text-sm text-primary-gray">
-                <Wifi className="w-4 h-4 text-green-500" />
-                <Signal className="w-4 h-4 text-green-500" />
-                <Battery className="w-4 h-4 text-green-500" />
+              {/* System Status with Modern Design */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl glass-morphism">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald animate-pulse-glow"></div>
+                  <span className="text-xs font-medium text-charcoal">Sistema</span>
+                </div>
+                <div className="w-px h-4 bg-white/20"></div>
+                <div className="flex items-center gap-1">
+                  <Wifi className="w-4 h-4 text-emerald" />
+                  <Signal className="w-4 h-4 text-emerald" />
+                  <Battery className="w-4 h-4 text-emerald" />
+                </div>
               </div>
-              <Button variant="outline" size="sm">
+              
+              <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                 <Monitor className="w-4 h-4 mr-2" />
                 Projetar
               </Button>
-              <Button variant="player" size="sm">
-                <Fullscreen className="w-4 h-4 mr-2" />
-                Tela Cheia
+              
+              <Button size="sm" className="gradient-player text-white shadow-medium hover:shadow-strong transition-all duration-300">
+                <Maximize2 className="w-4 h-4 mr-2" />
+                Modo Imersivo
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-8 overflow-x-auto">
-          {[
-            { id: 'overview', label: 'Visão Geral', icon: BarChart3 },
-            { id: 'active', label: 'Aula Ativa', icon: Play },
-            { id: 'attendance', label: 'Presença', icon: Users },
-            { id: 'activities', label: 'Atividades', icon: Target },
-            { id: 'widgets', label: 'Widgets Ativos', icon: Puzzle },
-            { id: 'analytics', label: 'Analytics Tempo Real', icon: Activity }
-          ].map(tab => (
-            <Button
-              key={tab.id}
-              variant={selectedView === tab.id ? 'player' : 'outline'}
-              onClick={() => setSelectedView(tab.id as any)}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
-              {tab.id === 'widgets' && sessionActive && (
-                <span className="ml-2 px-2 py-0.5 bg-player text-white text-xs rounded-full">
-                  {currentAdvancedSession.activeWidgets.length}
+      <main className="container mx-auto px-6 py-8 space-y-8">
+        {/* Modern Navigation Tabs */}
+        <div className="relative">
+          <div className="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+            {[
+              { id: 'overview', label: 'Visão Geral', icon: BarChart3, color: 'emerald' },
+              { id: 'active', label: 'Aula Ativa', icon: Play, color: 'teal' },
+              { id: 'attendance', label: 'Presença Inteligente', icon: Users, color: 'sage' },
+              { id: 'activities', label: 'Atividades 5E', icon: Target, color: 'amber' },
+              { id: 'widgets', label: 'Widget Studio', icon: Puzzle, color: 'violet' },
+              { id: 'analytics', label: 'Analytics IA', icon: Activity, color: 'coral' }
+            ].map((tab, index) => (
+              <Button
+                key={tab.id}
+                variant="ghost"
+                onClick={() => setSelectedView(tab.id as any)}
+                className={`relative flex items-center gap-3 px-6 py-3 rounded-2xl font-medium transition-all duration-500 whitespace-nowrap ${
+                  selectedView === tab.id 
+                    ? `glass-morphism shadow-medium border-white/30 bg-gradient-to-r from-${tab.color}/10 to-${tab.color}/20` 
+                    : 'hover:glass-morphism hover:shadow-soft'
+                }`}
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                  selectedView === tab.id 
+                    ? `bg-gradient-to-br from-${tab.color} to-${tab.color}/80 text-white shadow-medium` 
+                    : `bg-${tab.color}/10 text-${tab.color}`
+                }`}>
+                  <tab.icon className="w-4 h-4" />
+                </div>
+                
+                <span className={`text-sm font-medium transition-all duration-300 ${
+                  selectedView === tab.id ? 'text-charcoal' : 'text-slate'
+                }`}>
+                  {tab.label}
                 </span>
-              )}
-              {tab.id === 'active' && sessionActive && (
-                <span className="ml-2 w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              )}
-            </Button>
-          ))}
+                
+                {/* Active indicators */}
+                {tab.id === 'widgets' && sessionActive && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-violet to-violet/80 text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    {currentAdvancedSession.activeWidgets.length}
+                  </div>
+                )}
+                
+                {tab.id === 'active' && sessionActive && (
+                  <div className="ml-auto w-3 h-3 bg-gradient-to-r from-emerald to-teal rounded-full animate-pulse-glow shadow-glow"></div>
+                )}
+                
+                {/* Selection indicator */}
+                {selectedView === tab.id && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-emerald to-transparent rounded-full"></div>
+                )}
+              </Button>
+            ))}
+          </div>
+          
+          {/* Decorative gradient line */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sage/30 to-transparent"></div>
         </div>
 
-        {/* Overview Section */}
+        {/* Overview Section - Modern Design */}
         {selectedView === 'overview' && (
           <div className="space-y-8">
-            {/* Current Session Status */}
-            <Card className={`${sessionActive ? 'border-player/50 bg-player/5' : ''}`}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  {sessionActive ? <Zap className="w-5 h-5 text-player animate-pulse" /> : <Clock className="w-5 h-5 text-gray-400" />}
-                  {sessionActive ? 'Aula em Andamento' : 'Nenhuma Aula Ativa'}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+            {/* Current Session Status - Hero Card */}
+            <div className={`relative overflow-hidden rounded-3xl transition-all duration-700 ${
+              sessionActive 
+                ? 'gradient-player shadow-strong' 
+                : 'glass-morphism shadow-medium hover:shadow-strong'
+            }`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+              <div className="relative p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
+                    sessionActive 
+                      ? 'bg-white/20 text-white animate-float shadow-glow' 
+                      : 'bg-gradient-to-br from-slate/10 to-slate/20 text-slate'
+                  }`}>
+                    {sessionActive ? (
+                      <Zap className="w-8 h-8 animate-pulse-glow" />
+                    ) : (
+                      <Clock className="w-8 h-8" />
+                    )}
+                  </div>
+                  <div>
+                    <h2 className={`text-3xl font-bold ${
+                      sessionActive ? 'text-white' : 'text-charcoal'
+                    }`}>
+                      {sessionActive ? 'Aula em Execução' : 'Studio Pronto'}
+                    </h2>
+                    <p className={`text-lg ${
+                      sessionActive ? 'text-white/80' : 'text-slate/80'
+                    }`}>
+                      {sessionActive 
+                        ? 'Experiência de aprendizado ativa com analytics em tempo real' 
+                        : 'Pronto para iniciar sua próxima experiência de aprendizado'
+                      }
+                    </p>
+                  </div>
+                  
+                  {sessionActive && (
+                    <div className="ml-auto">
+                      <div className="px-4 py-2 bg-white/20 rounded-full text-white font-medium text-sm backdrop-blur-sm animate-pulse-glow">
+                        ● AO VIVO
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 {sessionActive ? (
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="font-semibold text-lg">{currentAdvancedSession.lesson.title}</h3>
-                        <p className="text-primary-gray">
-                          {currentAdvancedSession.className} • {currentAdvancedSession.institution} • {currentAdvancedSession.professor}
+                  <div className="space-y-8">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-white mb-2">{currentAdvancedSession.lesson.title}</h3>
+                        <p className="text-white/80 text-lg mb-4">
+                          {currentAdvancedSession.className} • {currentAdvancedSession.institution}
                         </p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
+                        <div className="flex items-center gap-3">
+                          <div className="px-3 py-1 bg-white/20 text-white text-sm rounded-xl font-medium backdrop-blur-sm">
                             {currentAdvancedSession.lesson.framework.name}
-                          </span>
-                          <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                          </div>
+                          <div className="px-3 py-1 bg-white/20 text-white text-sm rounded-xl font-medium backdrop-blur-sm">
                             {currentAdvancedSession.sessionMode}
-                          </span>
-                          <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                          </div>
+                          <div className="px-3 py-1 bg-amber/20 text-white text-sm rounded-xl font-medium backdrop-blur-sm">
                             {currentAdvancedSession.activeWidgets.length} widgets ativos
-                          </span>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm" onClick={() => setSelectedView('widgets')}>
+                      <div className="flex gap-3">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => setSelectedView('widgets')}
+                          className="bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-sm"
+                        >
                           <Puzzle className="w-4 h-4 mr-2" />
-                          Widgets ({currentAdvancedSession.activeWidgets.length})
+                          Widget Studio
                         </Button>
-                        <Button variant="player" size="sm" onClick={() => setSelectedView('active')}>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => setSelectedView('active')}
+                          className="bg-white/20 text-white hover:bg-white/30 border-white/30 backdrop-blur-sm shadow-medium"
+                        >
                           <Play className="w-4 h-4 mr-2" />
-                          Ir para Aula
+                          Entrar na Aula
                         </Button>
                       </div>
                     </div>
                     
-                    {/* Current Stage Progress */}
-                    <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-lg">
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-medium">Estágio Atual: {currentAdvancedSession.lesson.structure.stages[currentAdvancedSession.currentStage]?.stageName}</h4>
-                        <span className="text-sm text-purple-600 font-medium">
+                    {/* Modern Stage Progress */}
+                    <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="font-semibold text-white">
+                          Metodologia 5E • {currentAdvancedSession.lesson.structure.stages[currentAdvancedSession.currentStage]?.stageName}
+                        </h4>
+                        <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-xl font-mono backdrop-blur-sm">
                           {currentAdvancedSession.currentStage + 1}/{currentAdvancedSession.lesson.structure.stages.length}
                         </span>
                       </div>
-                      <div className="w-full bg-white rounded-full h-3 shadow-inner">
+                      <div className="w-full bg-white/20 rounded-full h-3 shadow-inner">
                         <div 
-                          className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-500" 
+                          className="bg-gradient-to-r from-amber via-coral to-violet h-3 rounded-full transition-all duration-500 shadow-glow" 
                           style={{ width: `${((currentAdvancedSession.currentStage + 1) / currentAdvancedSession.lesson.structure.stages.length) * 100}%` }}
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                      <div className="bg-white p-4 rounded-lg border border-purple-200">
-                        <div className="text-2xl font-bold text-player">{currentAdvancedSession.studentsPresent}/{currentAdvancedSession.totalStudents}</div>
-                        <div className="text-xs text-primary-gray">Presentes</div>
-                        <div className="text-xs text-green-600 font-medium">{Math.round((currentAdvancedSession.studentsPresent / currentAdvancedSession.totalStudents) * 100)}%</div>
+                    {/* Modern Analytics Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="glass-morphism p-6 rounded-2xl text-center border-white/20 shadow-medium">
+                        <div className="w-12 h-12 bg-gradient-to-br from-emerald to-teal rounded-xl flex items-center justify-center mx-auto mb-3 shadow-medium">
+                          <Users className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.studentsPresent}</div>
+                        <div className="text-sm text-slate font-medium">Presentes</div>
+                        <div className="text-xs text-emerald font-bold mt-1">{Math.round((currentAdvancedSession.studentsPresent / currentAdvancedSession.totalStudents) * 100)}% da turma</div>
                       </div>
-                      <div className="bg-white p-4 rounded-lg border border-blue-200">
-                        <div className="text-2xl font-bold text-player">{currentAdvancedSession.realTimeData.participationRate.toFixed(1)}%</div>
-                        <div className="text-xs text-primary-gray">Participação</div>
-                        <div className="text-xs text-green-600 font-medium flex items-center justify-center gap-1">
+                      
+                      <div className="glass-morphism p-6 rounded-2xl text-center border-white/20 shadow-medium">
+                        <div className="w-12 h-12 bg-gradient-to-br from-sage to-emerald rounded-xl flex items-center justify-center mx-auto mb-3 shadow-medium">
+                          <Activity className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.realTimeData.participationRate.toFixed(1)}%</div>
+                        <div className="text-sm text-slate font-medium">Participação</div>
+                        <div className="text-xs text-sage font-bold mt-1 flex items-center justify-center gap-1">
                           <TrendingUp className="w-3 h-3" />
                           {currentAdvancedSession.realTimeData.engagementTrend}
                         </div>
                       </div>
-                      <div className="bg-white p-4 rounded-lg border border-indigo-200">
-                        <div className="text-2xl font-bold text-player">{currentAdvancedSession.realTimeData.responsesReceived}</div>
-                        <div className="text-xs text-primary-gray">Interações</div>
-                        <div className="text-xs text-blue-600 font-medium">{currentAdvancedSession.realTimeData.lastInteractionTime}</div>
-                      </div>
-                      <div className="bg-white p-4 rounded-lg border border-green-200">
-                        <div className="text-2xl font-bold text-player">
-                          <span className={`${
-                            currentAdvancedSession.realTimeData.cognitiveLoad === 'low' ? 'text-green-500' :
-                            currentAdvancedSession.realTimeData.cognitiveLoad === 'medium' ? 'text-yellow-500' : 'text-red-500'
-                          }`}>
-                            {currentAdvancedSession.realTimeData.cognitiveLoad === 'low' ? 'Baixa' :
-                             currentAdvancedSession.realTimeData.cognitiveLoad === 'medium' ? 'Média' : 'Alta'}
-                          </span>
+                      
+                      <div className="glass-morphism p-6 rounded-2xl text-center border-white/20 shadow-medium">
+                        <div className="w-12 h-12 bg-gradient-to-br from-amber to-coral rounded-xl flex items-center justify-center mx-auto mb-3 shadow-medium">
+                          <Zap className="w-6 h-6 text-white" />
                         </div>
-                        <div className="text-xs text-primary-gray">Carga Cognitiva</div>
-                        <div className="text-xs text-gray-500">{currentAdvancedSession.realTimeData.attentionLevel.toFixed(1)}% atenção</div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.realTimeData.responsesReceived}</div>
+                        <div className="text-sm text-slate font-medium">Interações</div>
+                        <div className="text-xs text-amber font-bold mt-1">{currentAdvancedSession.realTimeData.lastInteractionTime}</div>
+                      </div>
+                      
+                      <div className="glass-morphism p-6 rounded-2xl text-center border-white/20 shadow-medium">
+                        <div className="w-12 h-12 bg-gradient-to-br from-violet to-teal rounded-xl flex items-center justify-center mx-auto mb-3 shadow-medium">
+                          <Brain className="w-6 h-6 text-white" />
+                        </div>
+                        <div className={`text-2xl font-bold ${
+                          currentAdvancedSession.realTimeData.cognitiveLoad === 'low' ? 'text-emerald' :
+                          currentAdvancedSession.realTimeData.cognitiveLoad === 'medium' ? 'text-amber' : 'text-coral'
+                        }`}>
+                          {currentAdvancedSession.realTimeData.cognitiveLoad === 'low' ? 'Ideal' :
+                           currentAdvancedSession.realTimeData.cognitiveLoad === 'medium' ? 'Boa' : 'Alta'}
+                        </div>
+                        <div className="text-sm text-slate font-medium">Carga Cognitiva</div>
+                        <div className="text-xs text-violet font-bold mt-1">{currentAdvancedSession.realTimeData.attentionLevel.toFixed(1)}% atenção</div>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center py-8">
-                    <Play className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <p className="text-primary-gray mb-4">Pronto para iniciar sua próxima aula</p>
-                    <div className="flex gap-2 justify-center">
+                  <div className="text-center py-12">
+                    <div className="w-20 h-20 bg-gradient-to-br from-slate/20 to-slate/30 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-medium">
+                      <Play className="w-10 h-10 text-slate" />
+                    </div>
+                    <p className="text-slate text-lg mb-8 font-medium">Pronto para criar experiências de aprendizado extraordinárias</p>
+                    <div className="flex gap-4 justify-center">
                       <Link href="/creator">
-                        <Button variant="outline" size="sm">
-                          <PencilRuler className="w-4 h-4 mr-2" />
-                          Criar Aula
+                        <Button variant="ghost" size="lg" className="glass-morphism hover:shadow-medium transition-all duration-300">
+                          <PencilRuler className="w-5 h-5 mr-3" />
+                          Creator Studio
                         </Button>
                       </Link>
-                      <Button variant="player" size="sm">
-                        <Play className="w-4 h-4 mr-2" />
-                        Iniciar Nova Aula
+                      <Button 
+                        size="lg" 
+                        onClick={() => setSessionActive(true)}
+                        className="gradient-sage text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                      >
+                        <Play className="w-5 h-5 mr-3" />
+                        Iniciar Experiência
                       </Button>
                     </div>
                   </div>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-            {/* Daily Statistics */}
+            {/* Modern Performance Overview */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <BookOpen className="w-4 h-4" />
-                    Aulas Hoje
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-player">{stats.completedToday}/{stats.totalLessonsToday}</div>
-                  <p className="text-xs text-primary-gray">Executadas</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald to-teal rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-emerald transition-colors duration-300">Sessões Hoje</h4>
+                    <p className="text-sm text-slate">Performance diária</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{stats.completedToday}/{stats.totalLessonsToday}</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-emerald to-teal h-2 rounded-full transition-all duration-500" 
+                      style={{ width: `${(stats.completedToday / stats.totalLessonsToday) * 100}%` }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-emerald">
+                    {Math.round((stats.completedToday / stats.totalLessonsToday) * 100)}% concluídas
+                  </p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    Frequência Média
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-player">{stats.averageAttendance}%</div>
-                  <p className="text-xs text-primary-gray">Esta semana</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-sage to-emerald rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-sage transition-colors duration-300">Frequência</h4>
+                    <p className="text-sm text-slate">Semana atual</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{stats.averageAttendance}%</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-sage to-emerald h-2 rounded-full transition-all duration-500" 
+                      style={{ width: `${stats.averageAttendance}%` }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-sage">Acima da meta (85%)</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <ThumbsUp className="w-4 h-4" />
-                    Engajamento
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-player">{stats.studentEngagement}%</div>
-                  <p className="text-xs text-primary-gray">Participação</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber to-coral rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-amber transition-colors duration-300">Engajamento</h4>
+                    <p className="text-sm text-slate">Interação ativa</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{stats.studentEngagement}%</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-amber to-coral h-2 rounded-full transition-all duration-500" 
+                      style={{ width: `${stats.studentEngagement}%` }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-amber">Participação excelente</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <Timer className="w-4 h-4" />
-                    Horas Semanais
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-player">{stats.hoursThisWeek}</div>
-                  <p className="text-xs text-primary-gray">{stats.lessonsThisWeek} aulas</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-violet to-teal rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <Clock className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-violet transition-colors duration-300">Tempo Ativo</h4>
+                    <p className="text-sm text-slate">Esta semana</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{stats.hoursThisWeek}h</div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="w-2 h-2 bg-violet rounded-full animate-pulse-glow"></div>
+                    <span className="text-violet font-medium">{stats.lessonsThisWeek} experiências</span>
+                  </div>
+                  <p className="text-sm font-medium text-violet">+12% vs semana anterior</p>
+                </div>
+              </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* Modern Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow border-player/20" 
-                    onClick={() => setSessionActive(true)}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Play className="w-5 h-5 text-player" />
-                    Iniciar Aula
-                  </CardTitle>
-                  <CardDescription>
-                    Execute uma aula criada no módulo Creator
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="player" size="sm">Escolher Aula</Button>
-                </CardContent>
-              </Card>
+              <div 
+                className="group glass-morphism p-8 rounded-3xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500 cursor-pointer" 
+                onClick={() => setSessionActive(true)}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald to-teal rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                    <Play className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-charcoal group-hover:text-emerald transition-colors duration-300">Iniciar Experiência</h4>
+                    <p className="text-slate/80 font-medium">Execute experiências do Creator Studio</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="lg" 
+                  className="w-full gradient-player text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                >
+                  <Sparkles className="w-5 h-5 mr-3" />
+                  Escolher Experiência
+                </Button>
+              </div>
 
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" 
-                    onClick={() => setSelectedView('attendance')}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-player" />
-                    Marcar Presença
-                  </CardTitle>
-                  <CardDescription>
-                    Registrar presença dos alunos rapidamente
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm">Abrir Lista</Button>
-                </CardContent>
-              </Card>
+              <div 
+                className="group glass-morphism p-8 rounded-3xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500 cursor-pointer" 
+                onClick={() => setSelectedView('attendance')}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-sage to-emerald rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-charcoal group-hover:text-sage transition-colors duration-300">Presença Inteligente</h4>
+                    <p className="text-slate/80 font-medium">Registro automático e analytics</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="lg" 
+                  className="w-full gradient-sage text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                >
+                  <Eye className="w-5 h-5 mr-3" />
+                  Abrir Sistema
+                </Button>
+              </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-player" />
-                    Analytics de Aula
-                  </CardTitle>
-                  <CardDescription>
-                    Visualizar dados e performance das suas aulas
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link href="/trainer">
-                    <Button variant="outline" size="sm">
-                      <BarChart3 className="w-4 h-4 mr-2" />
-                      Ver Analytics
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-8 rounded-3xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-violet to-teal rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                    <BarChart3 className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-charcoal group-hover:text-violet transition-colors duration-300">Analytics IA</h4>
+                    <p className="text-slate/80 font-medium">Insights avançados de aprendizado</p>
+                  </div>
+                </div>
+                <Link href="/trainer">
+                  <Button 
+                    variant="ghost" 
+                    size="lg" 
+                    className="w-full gradient-trainer text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                  >
+                    <Activity className="w-5 h-5 mr-3" />
+                    Trainer Studio
+                  </Button>
+                </Link>
+              </div>
             </div>
 
-            {/* Recent Sessions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Aulas Recentes</CardTitle>
-                <CardDescription>Últimas sessões executadas</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[
-                    { title: 'Frações e Decimais', class: '4º Ano B', time: '2h atrás', attendance: '95%' },
-                    { title: 'Brasil Colonial', class: '7º Ano A', time: '1 dia atrás', attendance: '88%' },
-                    { title: 'Gêneros Textuais', class: '3º Ano C', time: '2 dias atrás', attendance: '92%' }
-                  ].map((session, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-primary-powder rounded-lg">
-                      <div>
-                        <div className="font-medium">{session.title}</div>
-                        <div className="text-sm text-primary-gray">{session.class} • {session.time}</div>
+            {/* Modern Recent Sessions */}
+            <div className="glass-morphism p-8 rounded-3xl border-white/20 shadow-medium">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-charcoal to-slate rounded-2xl flex items-center justify-center shadow-medium">
+                  <Clock className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-charcoal">Experiências Recentes</h3>
+                  <p className="text-slate/80 font-medium">Últimas sessões executadas com analytics</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {[
+                  { 
+                    title: 'Frações e Decimais', 
+                    class: '4º Ano B', 
+                    time: '2h atrás', 
+                    attendance: '95%', 
+                    engagement: '92%',
+                    color: 'emerald',
+                    icon: BarChart3,
+                    widgets: 3
+                  },
+                  { 
+                    title: 'Brasil Colonial', 
+                    class: '7º Ano A', 
+                    time: '1 dia atrás', 
+                    attendance: '88%', 
+                    engagement: '85%',
+                    color: 'sage',
+                    icon: BookOpen,
+                    widgets: 5
+                  },
+                  { 
+                    title: 'Gêneros Textuais', 
+                    class: '3º Ano C', 
+                    time: '2 dias atrás', 
+                    attendance: '92%', 
+                    engagement: '89%',
+                    color: 'amber',
+                    icon: PencilRuler,
+                    widgets: 2
+                  }
+                ].map((session, index) => (
+                  <div 
+                    key={index} 
+                    className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-soft hover:shadow-medium transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-12 h-12 bg-gradient-to-br from-${session.color} to-${session.color}/80 rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-105 transition-all duration-300`}>
+                          <session.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-lg font-bold text-charcoal group-hover:text-emerald transition-colors duration-300">{session.title}</div>
+                          <div className="text-slate/80 font-medium">{session.class} • {session.time}</div>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium text-player">{session.attendance}</div>
-                        <div className="text-xs text-primary-gray">Presença</div>
+                      
+                      <div className="flex items-center gap-6">
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-emerald">{session.attendance}</div>
+                          <div className="text-xs text-slate font-medium">Presença</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-sage">{session.engagement}</div>
+                          <div className="text-xs text-slate font-medium">Engajamento</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-violet">{session.widgets}</div>
+                          <div className="text-xs text-slate font-medium">Widgets</div>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="glass-morphism hover:shadow-medium transition-all duration-300"
+                        >
+                          <Activity className="w-4 h-4 mr-2" />
+                          Ver Analytics
+                        </Button>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -1124,212 +1347,273 @@ export default function PlayerModule() {
           <div className="space-y-6">
             {sessionActive ? (
               <div>
-                {/* Advanced Lesson Control Panel */}
-                <Card className="border-player/50 bg-gradient-to-r from-purple-50 to-blue-50">
-                  <CardHeader>
+                {/* Modern Lesson Control Panel */}
+                <div className="relative overflow-hidden rounded-3xl gradient-player shadow-strong">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                  <div className="relative p-8">
                     <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="text-xl flex items-center gap-2">
-                          <Brain className="w-6 h-6 text-purple-600" />
-                          {currentAdvancedSession.lesson.title}
-                        </CardTitle>
-                        <CardDescription className="mt-1">
-                          {currentAdvancedSession.className} • {currentAdvancedSession.institution} • {currentAdvancedSession.professor}
-                        </CardDescription>
-                        <div className="flex items-center gap-2 mt-2">
-                          <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
-                            {currentAdvancedSession.lesson.framework.name}
-                          </span>
-                          <span className="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">
-                            Nível: {currentAdvancedSession.lesson.difficulty}
-                          </span>
+                      <div className="flex items-center gap-6">
+                        <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center shadow-glow animate-float">
+                          <Brain className="w-8 h-8 text-white" />
+                        </div>
+                        <div>
+                          <h2 className="text-3xl font-bold text-white">{currentAdvancedSession.lesson.title}</h2>
+                          <p className="text-white/80 text-lg font-medium mt-1">
+                            {currentAdvancedSession.className} • {currentAdvancedSession.institution}
+                          </p>
+                          <p className="text-white/70 font-medium">{currentAdvancedSession.professor}</p>
+                          <div className="flex items-center gap-3 mt-3">
+                            <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-xl font-medium backdrop-blur-sm">
+                              {currentAdvancedSession.lesson.framework.name}
+                            </span>
+                            <span className="px-3 py-1 bg-amber/20 text-white text-sm rounded-xl font-medium backdrop-blur-sm">
+                              Nível: {currentAdvancedSession.lesson.difficulty}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="text-right mr-4">
-                          <div className="text-sm text-gray-500">Duração</div>
-                          <div className="text-lg font-bold text-purple-600">{currentAdvancedSession.duration}min</div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-center px-4 py-3 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20">
+                          <div className="text-sm text-white/80 font-medium">Duração</div>
+                          <div className="text-2xl font-bold text-white">{currentAdvancedSession.duration}min</div>
                         </div>
-                        <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium animate-pulse flex items-center gap-2">
+                        <div className="px-4 py-2 bg-emerald/20 text-white rounded-xl text-sm font-bold animate-pulse-glow backdrop-blur-sm flex items-center gap-2">
                           <Zap className="w-4 h-4" />
                           ● AO VIVO
-                        </span>
-                        <Button variant="outline" size="sm" onClick={() => setSessionActive(false)}>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => setSessionActive(false)}
+                          className="bg-white/10 text-white hover:bg-white/20 border-white/20 backdrop-blur-sm"
+                        >
                           <Square className="w-4 h-4 mr-2" />
                           Finalizar
                         </Button>
                       </div>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    {/* 5E Framework Progress */}
-                    <div className="space-y-6">
-                      <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-sm font-medium text-gray-700">Metodologia 5E - Progresso da Aula</span>
-                          <span className="text-sm text-purple-600 font-medium">
-                            Estágio {currentAdvancedSession.currentStage + 1}/{currentAdvancedSession.lesson.structure.stages.length}
-                          </span>
-                        </div>
-                        
-                        {/* 5E Stages Visualization */}
-                        <div className="flex items-center gap-2 mb-4">
-                          {currentAdvancedSession.lesson.structure.stages.map((stage, index) => (
-                            <div key={stage.id} className="flex-1">
-                              <div className={`p-3 rounded-lg text-center transition-all duration-300 ${
-                                index === currentAdvancedSession.currentStage 
-                                  ? 'bg-purple-100 border-2 border-purple-500 text-purple-800' 
-                                  : index < currentAdvancedSession.currentStage
-                                  ? 'bg-green-100 border-2 border-green-500 text-green-800'
-                                  : 'bg-gray-100 border-2 border-gray-300 text-gray-500'
-                              }`}>
-                                <div className="text-xs font-medium">{stage.stageName.split(' ')[0]}</div>
-                                <div className="text-xs opacity-75">{stage.duration}min</div>
-                                {index === currentAdvancedSession.currentStage && (
-                                  <Sparkles className="w-3 h-3 mx-auto mt-1 animate-pulse" />
-                                )}
-                                {index < currentAdvancedSession.currentStage && (
-                                  <CheckCircle className="w-3 h-3 mx-auto mt-1" />
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        <div className="w-full bg-gray-200 rounded-full h-3 shadow-inner">
-                          <div 
-                            className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-500" 
-                            style={{ width: `${((currentAdvancedSession.currentStage + 1) / currentAdvancedSession.lesson.structure.stages.length) * 100}%` }}
-                          />
-                        </div>
+                    
+                    {/* Modern 5E Framework Progress */}
+                    <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20 mt-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <h4 className="text-xl font-bold text-white">Metodologia 5E • Framework Ativo</h4>
+                        <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-xl font-mono backdrop-blur-sm">
+                          Estágio {currentAdvancedSession.currentStage + 1}/{currentAdvancedSession.lesson.structure.stages.length}
+                        </span>
                       </div>
                       
-                      {/* Real-time Metrics Grid */}
-                      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                        <div className="bg-white p-3 rounded-lg border border-purple-200 text-center">
-                          <div className="text-lg font-bold text-purple-600">{currentAdvancedSession.studentsPresent}</div>
-                          <div className="text-xs text-gray-500">Presentes</div>
-                        </div>
-                        <div className="bg-white p-3 rounded-lg border border-blue-200 text-center">
-                          <div className="text-lg font-bold text-blue-600">{currentAdvancedSession.realTimeData.participationRate.toFixed(1)}%</div>
-                          <div className="text-xs text-gray-500">Participando</div>
-                        </div>
-                        <div className="bg-white p-3 rounded-lg border border-green-200 text-center">
-                          <div className="text-lg font-bold text-green-600">{currentAdvancedSession.realTimeData.responsesReceived}</div>
-                          <div className="text-xs text-gray-500">Respostas</div>
-                        </div>
-                        <div className="bg-white p-3 rounded-lg border border-orange-200 text-center">
-                          <div className="text-lg font-bold text-orange-600">{currentAdvancedSession.realTimeData.questionsRaised}</div>
-                          <div className="text-xs text-gray-500">Dúvidas</div>
-                        </div>
-                        <div className="bg-white p-3 rounded-lg border border-indigo-200 text-center">
-                          <div className="text-lg font-bold text-indigo-600">{currentAdvancedSession.activeWidgets.length}</div>
-                          <div className="text-xs text-gray-500">Widgets</div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Activity Controls */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Controles da Atividade Atual</CardTitle>
-                    <CardDescription>Exercício: Contando Objetos (8/15 min)</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-center gap-4 py-8">
-                      <Button variant="outline" size="lg">
-                        <SkipBack className="w-6 h-6" />
-                      </Button>
-                      <Button 
-                        variant="player" 
-                        size="lg" 
-                        className="w-20 h-20 rounded-full"
-                        onClick={() => setIsPlaying(!isPlaying)}
-                      >
-                        {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8" />}
-                      </Button>
-                      <Button variant="outline" size="lg">
-                        <SkipForward className="w-6 h-6" />
-                      </Button>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                      <Button variant="outline" className="flex items-center gap-2">
-                        <Hand className="w-4 h-4" />
-                        Solicitar Atenção
-                      </Button>
-                      <Button variant="outline" className="flex items-center gap-2">
-                        <Poll className="w-4 h-4" />
-                        Enquete Rápida
-                      </Button>
-                      <Button variant="outline" className="flex items-center gap-2">
-                        <MessageSquare className="w-4 h-4" />
-                        Chat da Turma
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Real-time Feedback */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Feedback em Tempo Real</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-medium mb-4">Participação dos Alunos</h4>
-                        <div className="space-y-2">
-                          {advancedStudents.slice(0, 3).map(student => (
-                            <div key={student.id} className="flex items-center justify-between p-2 bg-primary-powder rounded">
-                              <span className="text-sm">{student.name}</span>
-                              <div className="flex items-center gap-2">
-                                <div className={`w-3 h-3 rounded-full ${
-                                  student.participationLevel === 'high' ? 'bg-green-500' :
-                                  student.participationLevel === 'medium' ? 'bg-yellow-500' : 'bg-red-500'
-                                }`} />
-                                <span className="text-xs text-primary-gray">{student.lastActivity}</span>
-                              </div>
+                      {/* Modern 5E Stages Visualization */}
+                      <div className="flex items-center gap-3 mb-6">
+                        {currentAdvancedSession.lesson.structure.stages.map((stage, index) => (
+                          <div key={stage.id} className="flex-1">
+                            <div className={`p-4 rounded-xl text-center transition-all duration-500 ${
+                              index === currentAdvancedSession.currentStage 
+                                ? 'bg-gradient-to-br from-amber via-coral to-violet text-white shadow-glow border-2 border-white/50' 
+                                : index < currentAdvancedSession.currentStage
+                                ? 'bg-gradient-to-br from-emerald to-teal text-white shadow-medium'
+                                : 'bg-white/20 text-white/60 border border-white/30'
+                            }`}>
+                              <div className="text-sm font-bold">{stage.stageName.split(' ')[0]}</div>
+                              <div className="text-xs opacity-80">{stage.duration}min</div>
+                              {index === currentAdvancedSession.currentStage && (
+                                <Sparkles className="w-4 h-4 mx-auto mt-2 animate-pulse-glow" />
+                              )}
+                              {index < currentAdvancedSession.currentStage && (
+                                <CheckCircle className="w-4 h-4 mx-auto mt-2" />
+                              )}
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
                       
-                      <div>
-                        <h4 className="font-medium mb-4">Alertas</h4>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 p-2 bg-yellow-50 border border-yellow-200 rounded">
-                            <AlertCircle className="w-4 h-4 text-yellow-600" />
-                            <span className="text-sm text-yellow-800">3 alunos com dúvidas</span>
-                          </div>
-                          <div className="flex items-center gap-2 p-2 bg-blue-50 border border-blue-200 rounded">
-                            <Eye className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm text-blue-800">Participação acima da média</span>
-                          </div>
-                        </div>
+                      <div className="w-full bg-white/20 rounded-full h-3 shadow-inner">
+                        <div 
+                          className="bg-gradient-to-r from-amber via-coral to-violet h-3 rounded-full transition-all duration-500 shadow-glow" 
+                          style={{ width: `${((currentAdvancedSession.currentStage + 1) / currentAdvancedSession.lesson.structure.stages.length) * 100}%` }}
+                        />
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ) : (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Nenhuma Aula Ativa</CardTitle>
-                  <CardDescription>Inicie uma nova sessão para usar os controles em tempo real</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <Play className="w-16 h-16 text-player mx-auto mb-4" />
-                    <Button variant="player" onClick={() => setSessionActive(true)}>
-                      <Play className="w-4 h-4 mr-2" />
-                      Iniciar Nova Aula
+
+                    {/* Modern Real-time Analytics Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+                      <div className="glass-morphism p-4 rounded-xl border-white/20 text-center group hover:shadow-medium transition-all duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-br from-emerald to-teal rounded-lg flex items-center justify-center mx-auto mb-2 shadow-medium group-hover:shadow-glow transition-all duration-300">
+                          <Users className="w-4 h-4 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.studentsPresent}</div>
+                        <div className="text-xs text-slate font-medium">Presentes</div>
+                      </div>
+                      <div className="glass-morphism p-4 rounded-xl border-white/20 text-center group hover:shadow-medium transition-all duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-br from-sage to-emerald rounded-lg flex items-center justify-center mx-auto mb-2 shadow-medium group-hover:shadow-glow transition-all duration-300">
+                          <Activity className="w-4 h-4 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.realTimeData.participationRate.toFixed(1)}%</div>
+                        <div className="text-xs text-slate font-medium">Participando</div>
+                      </div>
+                      <div className="glass-morphism p-4 rounded-xl border-white/20 text-center group hover:shadow-medium transition-all duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-br from-amber to-coral rounded-lg flex items-center justify-center mx-auto mb-2 shadow-medium group-hover:shadow-glow transition-all duration-300">
+                          <Send className="w-4 h-4 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.realTimeData.responsesReceived}</div>
+                        <div className="text-xs text-slate font-medium">Respostas</div>
+                      </div>
+                      <div className="glass-morphism p-4 rounded-xl border-white/20 text-center group hover:shadow-medium transition-all duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-br from-coral to-violet rounded-lg flex items-center justify-center mx-auto mb-2 shadow-medium group-hover:shadow-glow transition-all duration-300">
+                          <MessageSquare className="w-4 h-4 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.realTimeData.questionsRaised}</div>
+                        <div className="text-xs text-slate font-medium">Dúvidas</div>
+                      </div>
+                      <div className="glass-morphism p-4 rounded-xl border-white/20 text-center group hover:shadow-medium transition-all duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-br from-violet to-teal rounded-lg flex items-center justify-center mx-auto mb-2 shadow-medium group-hover:shadow-glow transition-all duration-300">
+                          <Puzzle className="w-4 h-4 text-white" />
+                        </div>
+                        <div className="text-2xl font-bold text-charcoal">{currentAdvancedSession.activeWidgets.length}</div>
+                        <div className="text-xs text-slate font-medium">Widgets</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Modern Activity Controls */}
+                <div className="glass-morphism p-8 rounded-3xl border-white/20 shadow-medium">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-charcoal mb-2">Controle de Atividade Ativa</h3>
+                    <p className="text-slate/80 font-medium">Exercício: Contando Objetos • 8/15 min</p>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-6 py-12">
+                    <Button 
+                      variant="ghost" 
+                      size="lg"
+                      className="w-16 h-16 rounded-2xl glass-morphism hover:shadow-medium transition-all duration-300"
+                    >
+                      <SkipBack className="w-8 h-8 text-slate" />
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      className="w-24 h-24 rounded-3xl gradient-player text-white shadow-strong hover:shadow-glow hover:scale-105 transition-all duration-300"
+                      onClick={() => setIsPlaying(!isPlaying)}
+                    >
+                      {isPlaying ? <Pause className="w-10 h-10" /> : <Play className="w-10 h-10" />}
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="lg"
+                      className="w-16 h-16 rounded-2xl glass-morphism hover:shadow-medium transition-all duration-300"
+                    >
+                      <SkipForward className="w-8 h-8 text-slate" />
                     </Button>
                   </div>
-                </CardContent>
-              </Card>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Button variant="ghost" className="h-14 glass-morphism hover:shadow-medium transition-all duration-300 flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-amber to-coral rounded-lg flex items-center justify-center">
+                        <Hand className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-charcoal font-medium">Solicitar Atenção</span>
+                    </Button>
+                    <Button variant="ghost" className="h-14 glass-morphism hover:shadow-medium transition-all duration-300 flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-violet to-teal rounded-lg flex items-center justify-center">
+                        <Poll className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-charcoal font-medium">Enquete Rápida</span>
+                    </Button>
+                    <Button variant="ghost" className="h-14 glass-morphism hover:shadow-medium transition-all duration-300 flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-emerald to-sage rounded-lg flex items-center justify-center">
+                        <MessageSquare className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-charcoal font-medium">Chat da Turma</span>
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Modern Real-time Feedback */}
+                <div className="glass-morphism p-8 rounded-3xl border-white/20 shadow-medium">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 bg-gradient-to-br from-teal to-emerald rounded-2xl flex items-center justify-center shadow-medium">
+                      <Activity className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-charcoal">Feedback Tempo Real</h3>
+                      <p className="text-slate/80 font-medium">Analytics instantâneos de engajamento</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-lg font-bold text-charcoal mb-6 flex items-center gap-3">
+                        <div className="w-6 h-6 bg-gradient-to-br from-sage to-emerald rounded-lg flex items-center justify-center">
+                          <Users className="w-3 h-3 text-white" />
+                        </div>
+                        Participação dos Alunos
+                      </h4>
+                      <div className="space-y-3">
+                        {advancedStudents.slice(0, 3).map(student => (
+                          <div key={student.id} className="glass-morphism p-4 rounded-xl border-white/20 hover:shadow-medium transition-all duration-300">
+                            <div className="flex items-center justify-between">
+                              <span className="font-medium text-charcoal">{student.name}</span>
+                              <div className="flex items-center gap-3">
+                                <div className={`w-4 h-4 rounded-full shadow-medium ${
+                                  student.participationLevel === 'high' ? 'bg-gradient-to-br from-emerald to-teal' :
+                                  student.participationLevel === 'medium' ? 'bg-gradient-to-br from-amber to-coral' : 
+                                  'bg-gradient-to-br from-coral to-violet'
+                                }`} />
+                                <span className="text-sm text-slate font-medium">{student.lastActivity}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-bold text-charcoal mb-6 flex items-center gap-3">
+                        <div className="w-6 h-6 bg-gradient-to-br from-amber to-coral rounded-lg flex items-center justify-center">
+                          <AlertCircle className="w-3 h-3 text-white" />
+                        </div>
+                        Alertas Inteligentes
+                      </h4>
+                      <div className="space-y-3">
+                        <div className="glass-morphism p-4 rounded-xl border-amber/20 hover:shadow-medium transition-all duration-300">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-gradient-to-br from-amber to-coral rounded-lg flex items-center justify-center shadow-medium">
+                              <AlertCircle className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="font-medium text-charcoal">3 alunos com dúvidas ativas</span>
+                          </div>
+                        </div>
+                        <div className="glass-morphism p-4 rounded-xl border-emerald/20 hover:shadow-medium transition-all duration-300">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-gradient-to-br from-emerald to-teal rounded-lg flex items-center justify-center shadow-medium">
+                              <TrendingUp className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="font-medium text-charcoal">Participação acima da meta</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="glass-morphism p-16 rounded-3xl border-white/20 shadow-medium text-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-slate/20 to-slate/30 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-medium">
+                  <Play className="w-12 h-12 text-slate" />
+                </div>
+                <h3 className="text-3xl font-bold text-charcoal mb-4">Nenhuma Experiência Ativa</h3>
+                <p className="text-slate/80 text-lg mb-8 font-medium max-w-md mx-auto">
+                  Inicie uma nova experiência de aprendizado para acessar controles em tempo real e analytics avançados
+                </p>
+                <Button 
+                  size="lg"
+                  onClick={() => setSessionActive(true)}
+                  className="gradient-player text-white shadow-medium hover:shadow-strong hover:scale-105 transition-all duration-300"
+                >
+                  <Sparkles className="w-5 h-5 mr-3" />
+                  Iniciar Nova Experiência
+                </Button>
+              </div>
             )}
           </div>
         )}
