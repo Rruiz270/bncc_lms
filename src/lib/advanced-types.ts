@@ -125,7 +125,7 @@ export interface CourseModuleModelStructureStage {
   name: string
   sequence: number
   stageType: 'introduction' | 'development' | 'practice' | 'assessment' | 'reflection'
-  activities: CourseModuleModelStructureStageActivity[]
+  activities: CourseModuleLessonModelStructureStageActivity[]
 }
 
 export interface CourseModuleTheme {
@@ -887,6 +887,46 @@ export interface CourseMetadata {
   license: string
   keywords: string[]
   bnccAlignment: string[]
+}
+
+// ===============================
+// BNCC COMPETENCY SYSTEM
+// ===============================
+
+export interface BNCCCompetency {
+  id: string
+  code: string
+  description: string
+  subject: string
+  year: number | string
+  component: string
+  thematicUnit: string
+  skillsObjects: string[]
+  cognitiveLevel: 'remember' | 'understand' | 'apply' | 'analyze' | 'evaluate' | 'create'
+  complexity: 'basic' | 'intermediate' | 'advanced'
+  prerequisites: string[]
+  assessment: BNCCAssessmentCriteria
+  scope: 'local' | 'regional' | 'national'
+}
+
+export interface BNCCAssessmentCriteria {
+  id: string
+  competencyId: string
+  criteria: string[]
+  indicators: string[]
+  rubric: string
+  weight: number
+  minimumScore: number
+}
+
+export interface BNCCAlignment {
+  id: string
+  competencyCode: string
+  contentId: string
+  contentType: 'lesson' | 'activity' | 'assessment' | 'resource'
+  alignmentLevel: 'full' | 'partial' | 'supporting'
+  justification: string
+  evidence: string[]
 }
 
 // ===============================

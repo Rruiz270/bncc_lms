@@ -35,7 +35,9 @@ import {
   MoreHorizontal,
   Clock,
   Users,
-  CheckCircle
+  CheckCircle,
+  BarChart3,
+  Gauge
 } from "lucide-react"
 import Link from 'next/link'
 
@@ -67,7 +69,7 @@ import {
 export default function AdvancedBuilderModule() {
   const [selectedView, setSelectedView] = useState<'overview' | 'courses' | 'modules' | 'themes' | 'competencies' | 'knowledge' | 'mapping' | 'analytics'>('overview')
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedLevel, setSelectedLevel] = useState('all')
+  const [selectedLevel, setSelectedLevel] = useState<'all' | 'fundamental' | 'medio'>('all')
   const [selectedSubject, setSelectedSubject] = useState('all')
   const [expandedCourses, setExpandedCourses] = useState<Set<string>>(new Set())
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set())
@@ -724,7 +726,7 @@ export default function AdvancedBuilderModule() {
                     <select 
                       className="w-full px-3 py-2 border border-border rounded-md"
                       value={selectedLevel}
-                      onChange={(e) => setSelectedLevel(e.target.value)}
+                      onChange={(e) => setSelectedLevel(e.target.value as 'all' | 'fundamental' | 'medio')}
                     >
                       <option value="all">Todos os níveis</option>
                       <option value="fundamental">Ensino Fundamental</option>

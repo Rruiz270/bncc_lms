@@ -50,7 +50,8 @@ import {
   TrendingUp,
   Award,
   Trophy,
-  Sparkles
+  Sparkles,
+  Download
 } from "lucide-react"
 import Link from 'next/link'
 
@@ -750,7 +751,7 @@ export default function PlayerModule() {
             difficultyRating: 2.1,
             studentFeedback: { helpful: 26, confusing: 2 }
           },
-          renderStatus: 'completed'
+          renderStatus: 'completed' as 'loading' | 'ready' | 'error' | 'completed'
         }
       ] : [],
       studentProgress: Object.fromEntries(advancedStudents.map(student => [
@@ -1281,7 +1282,7 @@ export default function PlayerModule() {
                       <div>
                         <h4 className="font-medium mb-4">Participação dos Alunos</h4>
                         <div className="space-y-2">
-                          {mockStudents.slice(0, 3).map(student => (
+                          {advancedStudents.slice(0, 3).map(student => (
                             <div key={student.id} className="flex items-center justify-between p-2 bg-primary-powder rounded">
                               <span className="text-sm">{student.name}</span>
                               <div className="flex items-center gap-2">
@@ -1333,34 +1334,6 @@ export default function PlayerModule() {
           </div>
         )}
 
-        {/* Attendance Section */}
-        {selectedView === 'attendance' && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Lista de Presença - {currentSession.className}</CardTitle>
-                <CardDescription>Marque a presença dos alunos de forma rápida</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {mockStudents.map((student) => (
-                    <div key={student.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <span className="font-medium">{student.name}</span>
-                      <Button 
-                        variant={student.present ? "default" : "outline"} 
-                        size="sm"
-                        className={student.present ? "bg-green-600 hover:bg-green-700" : ""}
-                      >
-                        {student.present ? <CheckCircle className="w-4 h-4 mr-2" /> : null}
-                        {student.present ? "Presente" : "Ausente"}
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
 
         {/* Advanced Widget Control Panel */}
         {selectedView === 'widgets' && (
