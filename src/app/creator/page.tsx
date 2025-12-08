@@ -49,7 +49,8 @@ import {
   Award,
   ChevronRight,
   ChevronDown,
-  MoreHorizontal
+  MoreHorizontal,
+  TrendingUp
 } from "lucide-react"
 import Link from 'next/link'
 
@@ -475,36 +476,55 @@ export default function AdvancedCreatorModule() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-pearl via-primary-powder to-primary-green/5">
+      {/* Modern Header with Glassmorphism */}
+      <header className="glass-morphism border-b border-white/20 sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link href="/">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Dashboard
                 </Button>
               </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-primary-black flex items-center gap-2">
-                  <PencilRuler className="w-8 h-8 text-creator" />
-                  Advanced Creator
+              <div className="space-y-1">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-green via-sage to-emerald bg-clip-text text-transparent flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl gradient-creator flex items-center justify-center animate-float shadow-glow">
+                    <PencilRuler className="w-5 h-5 text-white" />
+                  </div>
+                  Creator Studio
                 </h1>
-                <p className="text-primary-gray">Criação Avançada - Sistema Completo de Estruturação Pedagógica</p>
+                <p className="text-slate/80 font-medium">Criação Inteligente • Estruturação Pedagógica Avançada</p>
               </div>
             </div>
+            
             <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
+              {/* System Status with Modern Design */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl glass-morphism">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-primary-green animate-pulse-glow"></div>
+                  <span className="text-xs font-medium text-charcoal">AI Studio</span>
+                </div>
+                <div className="w-px h-4 bg-white/20"></div>
+                <div className="flex items-center gap-1">
+                  <Brain className="w-4 h-4 text-primary-green" />
+                  <Workflow className="w-4 h-4 text-sage" />
+                  <Lightbulb className="w-4 h-4 text-emerald" />
+                </div>
+              </div>
+              
+              <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                 <Calendar className="w-4 h-4 mr-2" />
                 Cronograma
               </Button>
-              <Button variant="outline" size="sm">
+              
+              <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                 <Download className="w-4 h-4 mr-2" />
                 Export
               </Button>
-              <Button variant="creator" size="sm">
+              
+              <Button size="sm" className="gradient-creator text-white shadow-medium hover:shadow-strong transition-all duration-300">
                 <Plus className="w-4 h-4 mr-2" />
                 Novo Curso
               </Button>
@@ -513,209 +533,323 @@ export default function AdvancedCreatorModule() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-8 overflow-x-auto">
-          {[
-            { id: 'overview', label: 'Visão Geral', icon: BarChart },
-            { id: 'courses', label: 'Cursos', icon: BookOpen },
-            { id: 'lessons', label: 'Aulas Avançadas', icon: GraduationCap },
-            { id: 'structures', label: 'Estruturas', icon: Network },
-            { id: 'widgets', label: 'Widgets', icon: Puzzle },
-            { id: 'frameworks', label: 'Frameworks', icon: TreePine },
-            { id: 'analytics', label: 'Analytics', icon: Gauge }
-          ].map(tab => (
-            <Button
-              key={tab.id}
-              variant={selectedView === tab.id ? 'creator' : 'outline'}
-              onClick={() => setSelectedView(tab.id as any)}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
-            </Button>
-          ))}
+      <main className="container mx-auto px-6 py-8 space-y-8">
+        {/* Modern Navigation Tabs */}
+        <div className="relative">
+          <div className="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+            {[
+              { id: 'overview', label: 'Visão Geral', icon: BarChart, color: 'primary-green' },
+              { id: 'courses', label: 'Cursos', icon: BookOpen, color: 'sage' },
+              { id: 'lessons', label: 'Aulas Avançadas', icon: GraduationCap, color: 'emerald' },
+              { id: 'structures', label: 'Estruturas', icon: Network, color: 'teal' },
+              { id: 'widgets', label: 'Widgets', icon: Puzzle, color: 'violet' },
+              { id: 'frameworks', label: 'Frameworks', icon: TreePine, color: 'amber' },
+              { id: 'analytics', label: 'Analytics', icon: Gauge, color: 'coral' }
+            ].map((tab, index) => (
+              <Button
+                key={tab.id}
+                variant="ghost"
+                onClick={() => setSelectedView(tab.id as any)}
+                className={`relative flex items-center gap-3 px-6 py-3 rounded-2xl font-medium transition-all duration-500 whitespace-nowrap ${
+                  selectedView === tab.id 
+                    ? `glass-morphism shadow-medium border-white/30 bg-gradient-to-r from-${tab.color}/10 to-${tab.color}/20` 
+                    : 'hover:glass-morphism hover:shadow-soft'
+                }`}
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                  selectedView === tab.id 
+                    ? `bg-gradient-to-br from-${tab.color} to-${tab.color}/80 text-white shadow-medium` 
+                    : `bg-${tab.color}/10 text-${tab.color}`
+                }`}>
+                  <tab.icon className="w-4 h-4" />
+                </div>
+                
+                <span className={`text-sm font-medium transition-all duration-300 ${
+                  selectedView === tab.id ? 'text-charcoal' : 'text-slate'
+                }`}>
+                  {tab.label}
+                </span>
+                
+                {/* AI Activity indicators */}
+                {tab.id === 'structures' && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-emerald to-teal text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    {creatorStats.lessonStructures}
+                  </div>
+                )}
+                
+                {tab.id === 'widgets' && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-violet to-violet/80 text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    {creatorStats.activeWidgets}
+                  </div>
+                )}
+                
+                {/* Selection indicator */}
+                {selectedView === tab.id && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-primary-green to-transparent rounded-full"></div>
+                )}
+              </Button>
+            ))}
+          </div>
+          
+          {/* Decorative gradient line */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-green/30 to-transparent"></div>
         </div>
 
-        {/* Overview Section */}
+        {/* Modern Overview Section */}
         {selectedView === 'overview' && (
           <div className="space-y-8">
-            {/* Advanced Creator Statistics */}
+            {/* Modern Creator Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <BookOpen className="w-4 h-4" />
-                    Cursos Ativos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-creator">{creatorStats.totalCourses}</div>
-                  <p className="text-xs text-primary-gray">+12 este mês</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-sage to-emerald rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-sage transition-colors duration-300">Cursos Ativos</h4>
+                    <p className="text-sm text-slate">Biblioteca completa</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{creatorStats.totalCourses}</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-sage to-emerald h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '78%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-sage">+12 este mês</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4" />
-                    Aulas Estruturadas
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-creator">{creatorStats.totalLessons.toLocaleString()}</div>
-                  <p className="text-xs text-primary-gray">{creatorStats.lessonStructures} estruturas únicas</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald to-teal rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <GraduationCap className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-emerald transition-colors duration-300">Aulas Estruturadas</h4>
+                    <p className="text-sm text-slate">5E & Metodologias</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{creatorStats.totalLessons.toLocaleString()}</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-emerald to-teal h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '92%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-emerald">{creatorStats.lessonStructures} estruturas únicas</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <Puzzle className="w-4 h-4" />
-                    Widgets Disponíveis
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-creator">{creatorStats.activeWidgets}</div>
-                  <p className="text-xs text-primary-gray">89% compatíveis</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-violet to-teal rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <Puzzle className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-violet transition-colors duration-300">Widgets IA</h4>
+                    <p className="text-sm text-slate">Interativos</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{creatorStats.activeWidgets}</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-violet to-teal h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '89%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-violet">89% compatíveis</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <Award className="w-4 h-4" />
-                    Quality Score
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-creator">{creatorStats.qualityScore}%</div>
-                  <p className="text-xs text-green-600">↑ +2.3% vs mês anterior</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber to-coral rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <Award className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-amber transition-colors duration-300">Quality Score</h4>
+                    <p className="text-sm text-slate">IA Analytics</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{creatorStats.qualityScore}%</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-amber to-coral h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '94%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-amber flex items-center gap-1">
+                    <TrendingUp className="w-3 h-3" />
+                    +2.3% vs anterior
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* Quick Actions for Advanced Creator */}
+            {/* Modern Quick Actions for Advanced Creator */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow border-creator/20" 
-                    onClick={() => setSelectedView('courses')}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Plus className="w-5 h-5 text-creator" />
-                    Criar Curso Completo
-                  </CardTitle>
-                  <CardDescription>
-                    Estruture um curso com módulos, lições e avaliações integradas
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="creator" size="sm">Começar Curso</Button>
-                </CardContent>
-              </Card>
+              <div 
+                className="group glass-morphism p-8 rounded-3xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500 cursor-pointer" 
+                onClick={() => setSelectedView('courses')}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-green to-sage rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                    <Plus className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-charcoal group-hover:text-primary-green transition-colors duration-300">Criar Curso Completo</h4>
+                    <p className="text-slate/80 font-medium">Estrutura com módulos e avaliações IA</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="lg" 
+                  className="w-full gradient-creator text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                >
+                  <Lightbulb className="w-5 h-5 mr-3" />
+                  Começar Criação
+                </Button>
+              </div>
 
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" 
-                    onClick={() => setSelectedView('structures')}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Network className="w-5 h-5 text-creator" />
-                    Estruturas Pedagógicas
-                  </CardTitle>
-                  <CardDescription>
-                    {creatorStats.lessonStructures} estruturas reutilizáveis para diferentes metodologias
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm">Ver Estruturas</Button>
-                </CardContent>
-              </Card>
+              <div 
+                className="group glass-morphism p-8 rounded-3xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500 cursor-pointer" 
+                onClick={() => setSelectedView('structures')}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald to-teal rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                    <Network className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-charcoal group-hover:text-emerald transition-colors duration-300">Estruturas 5E</h4>
+                    <p className="text-slate/80 font-medium">{creatorStats.lessonStructures} metodologias reutilizáveis</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="lg" 
+                  className="w-full gradient-sage text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                >
+                  <TreePine className="w-5 h-5 mr-3" />
+                  Ver Estruturas
+                </Button>
+              </div>
 
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" 
-                    onClick={() => setSelectedView('widgets')}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Puzzle className="w-5 h-5 text-creator" />
-                    Biblioteca de Widgets
-                  </CardTitle>
-                  <CardDescription>
-                    {creatorStats.activeWidgets} widgets interativos para enriquecer suas aulas
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm">Explorar Widgets</Button>
-                </CardContent>
-              </Card>
+              <div 
+                className="group glass-morphism p-8 rounded-3xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500 cursor-pointer" 
+                onClick={() => setSelectedView('widgets')}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-violet to-teal rounded-2xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
+                    <Puzzle className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-charcoal group-hover:text-violet transition-colors duration-300">Widgets IA</h4>
+                    <p className="text-slate/80 font-medium">{creatorStats.activeWidgets} interativos avançados</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="lg" 
+                  className="w-full gradient-trainer text-white shadow-medium hover:shadow-strong transition-all duration-300"
+                >
+                  <Zap className="w-5 h-5 mr-3" />
+                  Explorar Biblioteca
+                </Button>
+              </div>
             </div>
 
-            {/* Recent Advanced Lessons */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5 text-creator" />
-                  Aulas Recentes - Estrutura Avançada
-                </CardTitle>
-                <CardDescription>Suas últimas criações com estrutura pedagógica completa</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {sampleLessons.slice(0, 3).map((lesson) => (
-                    <div key={lesson.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between">
+            {/* Modern Recent Advanced Lessons */}
+            <div className="glass-morphism p-8 rounded-3xl border-white/20 shadow-medium">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-green to-emerald rounded-2xl flex items-center justify-center shadow-medium">
+                  <GraduationCap className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-charcoal">Criações Recentes</h3>
+                  <p className="text-slate/80 font-medium">Estruturas pedagógicas avançadas com metodologia 5E</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {sampleLessons.slice(0, 3).map((lesson, index) => (
+                  <div 
+                    key={lesson.id} 
+                    className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-soft hover:shadow-medium transition-all duration-300"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-4 flex-1">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow group-hover:scale-105 transition-all duration-300 ${
+                          index === 0 ? 'bg-gradient-to-br from-primary-green to-sage' :
+                          index === 1 ? 'bg-gradient-to-br from-emerald to-teal' : 
+                          'bg-gradient-to-br from-sage to-emerald'
+                        }`}>
+                          <GraduationCap className="w-6 h-6 text-white" />
+                        </div>
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <div className="w-10 h-10 bg-creator rounded-lg flex items-center justify-center">
-                              <GraduationCap className="w-5 h-5 text-white" />
-                            </div>
-                            <div>
-                              <h3 className="font-semibold">{lesson.title}</h3>
-                              <div className="flex items-center gap-2 text-sm text-primary-gray">
-                                <span>{lesson.framework.name}</span>
-                                <span>•</span>
-                                <span className={`px-2 py-1 rounded text-xs ${getLessonComplexityColor(lesson.difficulty)}`}>
-                                  {lesson.difficulty}
-                                </span>
-                                <span>•</span>
-                                <span>{lesson.duration}min</span>
-                              </div>
+                            <h4 className="text-lg font-bold text-charcoal group-hover:text-primary-green transition-colors duration-300">{lesson.title}</h4>
+                            <div className="flex items-center gap-2">
+                              <span className="px-3 py-1 bg-primary-green/10 text-primary-green text-xs rounded-xl font-medium">
+                                {lesson.framework.name}
+                              </span>
+                              <span className={`px-3 py-1 text-xs rounded-xl font-medium ${
+                                lesson.difficulty === 'beginner' ? 'bg-emerald/10 text-emerald' :
+                                lesson.difficulty === 'intermediate' ? 'bg-amber/10 text-amber' : 'bg-coral/10 text-coral'
+                              }`}>
+                                {lesson.difficulty}
+                              </span>
+                              <span className="px-3 py-1 bg-violet/10 text-violet text-xs rounded-xl font-medium">
+                                {lesson.duration}min
+                              </span>
                             </div>
                           </div>
                           
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                            <div className="text-center p-3 bg-primary-powder rounded-lg">
-                              <div className="text-lg font-bold text-creator">{lesson.structure.stages.length}</div>
-                              <div className="text-xs text-primary-gray">Estágios</div>
+                          <div className="grid grid-cols-3 gap-4 mt-4">
+                            <div className="text-center p-3 glass-morphism rounded-xl border-white/10">
+                              <div className="text-2xl font-bold text-charcoal">{lesson.structure.stages.length}</div>
+                              <div className="text-xs text-slate font-medium">Estágios 5E</div>
                             </div>
-                            <div className="text-center p-3 bg-primary-powder rounded-lg">
-                              <div className="text-lg font-bold text-creator">
+                            <div className="text-center p-3 glass-morphism rounded-xl border-white/10">
+                              <div className="text-2xl font-bold text-charcoal">
                                 {lesson.structure.stages.reduce((acc, stage) => acc + stage.activities.length, 0)}
                               </div>
-                              <div className="text-xs text-primary-gray">Atividades</div>
+                              <div className="text-xs text-slate font-medium">Atividades</div>
                             </div>
-                            <div className="text-center p-3 bg-primary-powder rounded-lg">
-                              <div className="text-lg font-bold text-creator">{lesson.lessonType.interactionLevel}</div>
-                              <div className="text-xs text-primary-gray">Interação</div>
+                            <div className="text-center p-3 glass-morphism rounded-xl border-white/10">
+                              <div className="text-2xl font-bold text-charcoal capitalize">{lesson.lessonType.interactionLevel}</div>
+                              <div className="text-xs text-slate font-medium">Interação</div>
                             </div>
                           </div>
                         </div>
-                        
-                        <div className="flex gap-2 ml-4">
-                          <Button variant="outline" size="sm">
-                            <Edit className="w-4 h-4" />
+                      </div>
+                      
+                      <div className="flex gap-2 ml-6">
+                        <Button variant="ghost" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Link href="/player">
+                          <Button variant="ghost" size="sm" className="gradient-creator text-white shadow-medium hover:shadow-strong transition-all duration-300">
+                            <Play className="w-4 h-4" />
                           </Button>
-                          <Link href="/player">
-                            <Button variant="creator" size="sm">
-                              <Play className="w-4 h-4" />
-                            </Button>
-                          </Link>
-                          <Button variant="outline" size="sm">
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
-                        </div>
+                        </Link>
+                        <Button variant="ghost" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
+                          <MoreHorizontal className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 

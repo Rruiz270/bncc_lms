@@ -272,29 +272,46 @@ export default function TrainerModule() {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-pearl via-primary-powder to-charcoal/5">
+      {/* Modern Header with Glassmorphism */}
+      <header className="glass-morphism border-b border-white/20 sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link href="/">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Dashboard
                 </Button>
               </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-primary-black flex items-center gap-2">
-                  <BarChart3 className="w-8 h-8 text-trainer" />
-                  Módulo Trainer
+              <div className="space-y-1">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-charcoal via-slate to-charcoal bg-clip-text text-transparent flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl gradient-trainer flex items-center justify-center animate-float shadow-glow">
+                    <BarChart3 className="w-5 h-5 text-white" />
+                  </div>
+                  Trainer Studio
                 </h1>
-                <p className="text-primary-gray">Análise de Performance - Dados e Relatórios Pedagógicos Inteligentes</p>
+                <p className="text-slate/80 font-medium">Analytics IA • Insights Pedagógicos Avançados</p>
               </div>
             </div>
+            
             <div className="flex items-center gap-4">
+              {/* System Status with Modern Design */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl glass-morphism">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-charcoal animate-pulse-glow"></div>
+                  <span className="text-xs font-medium text-charcoal">Analytics IA</span>
+                </div>
+                <div className="w-px h-4 bg-white/20"></div>
+                <div className="flex items-center gap-1">
+                  <Activity className="w-4 h-4 text-charcoal" />
+                  <Brain className="w-4 h-4 text-slate" />
+                  <TrendingUp className="w-4 h-4 text-charcoal" />
+                </div>
+              </div>
+              
               <select 
-                className="px-3 py-2 border border-border rounded-md text-sm"
+                className="px-3 py-2 glass-morphism border border-white/20 rounded-xl text-sm font-medium text-charcoal focus:outline-none focus:shadow-medium transition-all duration-300"
                 value={selectedPeriod}
                 onChange={(e) => setSelectedPeriod(e.target.value)}
               >
@@ -303,40 +320,83 @@ export default function TrainerModule() {
                 <option value="quarter">Trimestre</option>
                 <option value="year">Ano Letivo</option>
               </select>
-              <Button variant="outline" size="sm">
+              
+              <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                 <Download className="w-4 h-4 mr-2" />
                 Exportar Dados
               </Button>
-              <Button variant="trainer" size="sm">
+              
+              <Button size="sm" className="gradient-trainer text-white shadow-medium hover:shadow-strong transition-all duration-300">
                 <Settings className="w-4 h-4 mr-2" />
-                Configurar Métricas
+                Configurar IA
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-8 overflow-x-auto">
-          {[
-            { id: 'overview', label: 'Visão Geral', icon: BarChart3 },
-            { id: 'students', label: 'Desempenho Individual', icon: GraduationCap },
-            { id: 'classes', label: 'Análise por Turma', icon: Users },
-            { id: 'schools', label: 'Ranking Escolar', icon: School },
-            { id: 'competencies', label: 'Competências BNCC', icon: Target },
-            { id: 'reports', label: 'Relatórios', icon: FileText }
-          ].map(tab => (
-            <Button
-              key={tab.id}
-              variant={selectedView === tab.id ? 'trainer' : 'outline'}
-              onClick={() => setSelectedView(tab.id as any)}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
-            </Button>
-          ))}
+      <main className="container mx-auto px-6 py-8 space-y-8">
+        {/* Modern Navigation Tabs */}
+        <div className="relative">
+          <div className="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+            {[
+              { id: 'overview', label: 'Visão Geral', icon: BarChart3, color: 'charcoal' },
+              { id: 'students', label: 'Performance Individual', icon: GraduationCap, color: 'emerald' },
+              { id: 'classes', label: 'Analytics por Turma', icon: Users, color: 'teal' },
+              { id: 'schools', label: 'Ranking Escolas', icon: School, color: 'slate' },
+              { id: 'competencies', label: 'BNCC Analytics', icon: Target, color: 'sage' },
+              { id: 'reports', label: 'Relatórios IA', icon: FileText, color: 'amber' }
+            ].map((tab, index) => (
+              <Button
+                key={tab.id}
+                variant="ghost"
+                onClick={() => setSelectedView(tab.id as any)}
+                className={`relative flex items-center gap-3 px-6 py-3 rounded-2xl font-medium transition-all duration-500 whitespace-nowrap ${
+                  selectedView === tab.id 
+                    ? `glass-morphism shadow-medium border-white/30 bg-gradient-to-r from-${tab.color}/10 to-${tab.color}/20` 
+                    : 'hover:glass-morphism hover:shadow-soft'
+                }`}
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                  selectedView === tab.id 
+                    ? `bg-gradient-to-br from-${tab.color} to-${tab.color}/80 text-white shadow-medium` 
+                    : `bg-${tab.color}/10 text-${tab.color}`
+                }`}>
+                  <tab.icon className="w-4 h-4" />
+                </div>
+                
+                <span className={`text-sm font-medium transition-all duration-300 ${
+                  selectedView === tab.id ? 'text-charcoal' : 'text-slate'
+                }`}>
+                  {tab.label}
+                </span>
+                
+                {/* AI processing indicators */}
+                {tab.id === 'overview' && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-charcoal to-slate text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    IA
+                  </div>
+                )}
+                
+                {tab.id === 'competencies' && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-sage to-emerald text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    BNCC
+                  </div>
+                )}
+                
+                {/* Selection indicator */}
+                {selectedView === tab.id && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-charcoal to-transparent rounded-full"></div>
+                )}
+              </Button>
+            ))}
+          </div>
+          
+          {/* Decorative gradient line */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-charcoal/30 to-transparent"></div>
         </div>
 
         {/* Overview Section */}

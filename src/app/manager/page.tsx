@@ -162,32 +162,50 @@ export default function ManagerModule() {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-6">
+    <div className="min-h-screen bg-gradient-to-br from-pearl via-primary-powder to-slate/5">
+      {/* Modern Header with Glassmorphism */}
+      <header className="glass-morphism border-b border-white/20 sticky top-0 z-50">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <Link href="/">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Dashboard
                 </Button>
               </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-primary-black flex items-center gap-2">
-                  <Users className="w-8 h-8 text-manager" />
-                  Módulo Manager
+              <div className="space-y-1">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-slate via-charcoal to-slate bg-clip-text text-transparent flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl gradient-manager flex items-center justify-center animate-float shadow-glow">
+                    <Users className="w-5 h-5 text-white" />
+                  </div>
+                  Manager Studio
                 </h1>
-                <p className="text-primary-gray">Gestão Escolar - Administração de Escolas, Professores e Alunos</p>
+                <p className="text-slate/80 font-medium">Gestão Inteligente • Administração Escolar Avançada</p>
               </div>
             </div>
+            
             <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
+              {/* System Status with Modern Design */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl glass-morphism">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-slate animate-pulse-glow"></div>
+                  <span className="text-xs font-medium text-charcoal">Rede Ativa</span>
+                </div>
+                <div className="w-px h-4 bg-white/20"></div>
+                <div className="flex items-center gap-1">
+                  <School className="w-4 h-4 text-slate" />
+                  <UserCheck className="w-4 h-4 text-charcoal" />
+                  <GraduationCap className="w-4 h-4 text-slate" />
+                </div>
+              </div>
+              
+              <Button variant="outline" size="sm" className="glass-morphism hover:shadow-medium transition-all duration-300">
                 <Download className="w-4 h-4 mr-2" />
                 Relatório Geral
               </Button>
-              <Button variant="manager" size="sm">
+              
+              <Button size="sm" className="gradient-manager text-white shadow-medium hover:shadow-strong transition-all duration-300">
                 <Settings className="w-4 h-4 mr-2" />
                 Configurações
               </Button>
@@ -196,86 +214,161 @@ export default function ManagerModule() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-8 overflow-x-auto">
-          {[
-            { id: 'overview', label: 'Visão Geral', icon: BarChart3 },
-            { id: 'schools', label: 'Escolas', icon: School },
-            { id: 'teachers', label: 'Professores', icon: UserCheck },
-            { id: 'students', label: 'Alunos', icon: GraduationCap },
-            { id: 'classes', label: 'Turmas', icon: BookOpen }
-          ].map(tab => (
-            <Button
-              key={tab.id}
-              variant={selectedView === tab.id ? 'manager' : 'outline'}
-              onClick={() => setSelectedView(tab.id as any)}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <tab.icon className="w-4 h-4" />
-              {tab.label}
-            </Button>
-          ))}
+      <main className="container mx-auto px-6 py-8 space-y-8">
+        {/* Modern Navigation Tabs */}
+        <div className="relative">
+          <div className="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+            {[
+              { id: 'overview', label: 'Visão Geral', icon: BarChart3, color: 'slate' },
+              { id: 'schools', label: 'Escolas', icon: School, color: 'charcoal' },
+              { id: 'teachers', label: 'Professores', icon: UserCheck, color: 'emerald' },
+              { id: 'students', label: 'Alunos', icon: GraduationCap, color: 'teal' },
+              { id: 'classes', label: 'Turmas', icon: BookOpen, color: 'sage' }
+            ].map((tab, index) => (
+              <Button
+                key={tab.id}
+                variant="ghost"
+                onClick={() => setSelectedView(tab.id as any)}
+                className={`relative flex items-center gap-3 px-6 py-3 rounded-2xl font-medium transition-all duration-500 whitespace-nowrap ${
+                  selectedView === tab.id 
+                    ? `glass-morphism shadow-medium border-white/30 bg-gradient-to-r from-${tab.color}/10 to-${tab.color}/20` 
+                    : 'hover:glass-morphism hover:shadow-soft'
+                }`}
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                  selectedView === tab.id 
+                    ? `bg-gradient-to-br from-${tab.color} to-${tab.color}/80 text-white shadow-medium` 
+                    : `bg-${tab.color}/10 text-${tab.color}`
+                }`}>
+                  <tab.icon className="w-4 h-4" />
+                </div>
+                
+                <span className={`text-sm font-medium transition-all duration-300 ${
+                  selectedView === tab.id ? 'text-charcoal' : 'text-slate'
+                }`}>
+                  {tab.label}
+                </span>
+                
+                {/* Network status indicators */}
+                {tab.id === 'schools' && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-charcoal to-slate text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    {stats.totalSchools}
+                  </div>
+                )}
+                
+                {tab.id === 'teachers' && (
+                  <div className="ml-auto px-2 py-1 bg-gradient-to-r from-emerald to-teal text-white text-xs rounded-lg font-bold shadow-medium animate-pulse-glow">
+                    {Math.round(stats.totalTeachers/1000)}K
+                  </div>
+                )}
+                
+                {/* Selection indicator */}
+                {selectedView === tab.id && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-transparent via-slate to-transparent rounded-full"></div>
+                )}
+              </Button>
+            ))}
+          </div>
+          
+          {/* Decorative gradient line */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate/30 to-transparent"></div>
         </div>
 
-        {/* Overview Section */}
+        {/* Modern Overview Section */}
         {selectedView === 'overview' && (
           <div className="space-y-8">
-            {/* Network Statistics */}
+            {/* Modern Network Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <School className="w-4 h-4" />
-                    Escolas Ativas
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-manager">{stats.totalSchools.toLocaleString()}</div>
-                  <p className="text-xs text-primary-gray">Rede estadual SC</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-charcoal to-slate rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <School className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-slate transition-colors duration-300">Escolas Ativas</h4>
+                    <p className="text-sm text-slate">Rede Estadual SC</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{stats.totalSchools.toLocaleString()}</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-charcoal to-slate h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '95%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-slate">95% operacionais</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <UserCheck className="w-4 h-4" />
-                    Professores
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-manager">{stats.totalTeachers.toLocaleString()}</div>
-                  <p className="text-xs text-primary-gray">
-                    {stats.contractedTeachers.toLocaleString()} Efetivos | {stats.actTeachers.toLocaleString()} ACT
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald to-teal rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <UserCheck className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-emerald transition-colors duration-300">Professores</h4>
+                    <p className="text-sm text-slate">Força Docente</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{Math.round(stats.totalTeachers/1000)}K</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-emerald to-teal h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '90%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-emerald">{Math.round(stats.contractedTeachers/1000)}K Efetivos • {Math.round(stats.actTeachers/1000)}K ACT</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4" />
-                    Alunos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-manager">{stats.totalStudents.toLocaleString()}</div>
-                  <p className="text-xs text-primary-gray">Matriculados em 2024</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-teal to-sage rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <GraduationCap className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-teal transition-colors duration-300">Alunos</h4>
+                    <p className="text-sm text-slate">Matriculados 2024</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{Math.round(stats.totalStudents/1000)}K</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-teal to-sage h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '88%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-teal">88% frequência ativa</p>
+                </div>
+              </div>
 
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium text-primary-gray flex items-center gap-2">
-                    <BookOpen className="w-4 h-4" />
-                    Turmas
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-manager">{stats.totalClasses.toLocaleString()}</div>
-                  <p className="text-xs text-primary-gray">Distribuídas na rede</p>
-                </CardContent>
-              </Card>
+              <div className="group glass-morphism p-6 rounded-2xl border-white/20 shadow-medium hover:shadow-strong transition-all duration-500">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-sage to-emerald rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow transition-all duration-300">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal group-hover:text-sage transition-colors duration-300">Turmas</h4>
+                    <p className="text-sm text-slate">Distribuídas</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-3xl font-bold text-charcoal">{Math.round(stats.totalClasses/1000)}K</div>
+                  <div className="w-full bg-slate/20 rounded-full h-2">
+                    <div 
+                      className="bg-gradient-to-r from-sage to-emerald h-2 rounded-full transition-all duration-500" 
+                      style={{ width: '92%' }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-sage">92% capacidade média</p>
+                </div>
+              </div>
             </div>
 
             {/* Quick Actions */}
